@@ -1,5 +1,6 @@
 import React from 'react'
 import './Login.css'
+import Button from '@mui/material/Button'
 import loginImage from '../Images/loginPageImage.jpg'
 export default function Login() {
   return (
@@ -19,7 +20,7 @@ export default function Login() {
       <input type="text" placeholder='Enter Password'  style={{height: "40px", width:"300px"}}/>
       <div><input type="checkbox" /> Remember me </div>
       </div>
-      <button className='login-button'>Log In</button>
+      <Button variant='contained' className='login-button'>Log In</Button>
       </form>
      </div>
     

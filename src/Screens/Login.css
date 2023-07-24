@@ -19,10 +19,12 @@
     border-radius: 4px;
     background: #6200EE;
     height: 30px;
-    width: 200px;
+    width: 230px;
     color: white;
     margin-top: 2rem;
-
+}
+.login-button:hover{
+    background-color: #664594;
 }
 input{
     background-color: rgb(236,234,244);

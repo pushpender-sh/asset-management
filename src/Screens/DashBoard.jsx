@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+// import React, { useEffect } from 'react';
 import { useAuth } from './GlobalContext';
 import Navbar from '../Components/Navbar';
 import './DashBoard.css';
@@ -31,7 +31,7 @@ function BigCard(){
 }
 
 export default function Dashboard() {
-  const { token, assetvalue } = useAuth();
+  const {assetvalue } = useAuth();
   if(!assetvalue){
     return(
         <div> <CircularProgress/> <br />
@@ -40,8 +40,6 @@ export default function Dashboard() {
   }
 //   console.log(assetvalue.distributedAssets)
 
-  
-  
   return (
     <div>
       <Navbar/>

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useAuth } from './GlobalContext';
+import Navbar from '../Components/Navbar';
 
 export default function Dashboard() {
   const { token } = useAuth();
@@ -31,7 +32,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      {/* Your Dashboard content */}
+      <Navbar/>
     </div>
   );
 }

@@ -1,0 +1,44 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.24);
+}
+.left-img{
+    display: flex;
+    column-gap: 8px;
+    align-items: center;
+    color: #7737FF;
+    font-weight: bold;
+    padding: 8px;
+}
+.line{
+    border: 0.5px solid #7737FF;
+    height: 0px;
+    width: auto;
+}
+
+.bottom-title{
+    font-weight: lighter;
+}
+.items{
+    color: #5C5665;
+    text-align: center;
+    font-family: Roboto;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.left-items{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 5rem;
+}
+
+.profile{
+    display: flex;
+    column-gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30px;
+}

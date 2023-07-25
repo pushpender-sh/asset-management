@@ -23,9 +23,11 @@
     color: white;
     margin-top: 2rem;
 }
-.login-button:hover{
+/* .login-button:hover{
     background-color: #664594;
-}
+} */
+
+
 input{
     background-color: rgb(236,234,244);
     margin-top: 10px;

@@ -43,10 +43,7 @@
 .assetslist:hover, .employerlist:hover, .accessedby:hover{
     cursor: pointer;
 }
-.assetslist:active{
-    color: black;
-    font-weight: bolder;
-}
+
 
 .left-items{
     display: flex;
@@ -61,4 +58,11 @@
     align-items: center;
     justify-content: center;
     margin-right: 30px;
+}
+
+.logout{
+    background-color: #7737FF;
+}
+.logout:hover{
+    cursor: pointer;
 }

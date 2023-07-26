@@ -6,10 +6,15 @@ import women from '../Images/women.png'
 import arrowdown from '../Images/arrowdown.jpg'
 
 
-
 export default function Navbar() {
 
     const { setToken,  navigate} = useAuth();
+
+    const handleLogout=()=>{
+      localStorage.removeItem('token')
+      setToken('')
+      navigate('/')
+    }
 
   return (
     <div className='navbar'>
@@ -42,7 +47,7 @@ export default function Navbar() {
       <div className='profile'>
         <div style={{fontWeight:"bold"}}> Nitya Jain</div>
         <img src={women} alt="women" style={{borderRadius: "100%"}} />
-        <img src={arrowdown} alt="" />
+        <img onClick={handleLogout} src={arrowdown} alt="" className='logout' />
 
       </div>
     </div>

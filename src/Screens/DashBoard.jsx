@@ -1,6 +1,7 @@
 // import React, { useEffect } from 'react';
 import { useAuth } from './GlobalContext';
 import Navbar from './Navbar';
+
 import './DashBoard.css';
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -64,8 +65,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      <Navbar/>
-
+        <Navbar/>
       <div className='asset-boxes'>
       <Box assetImage={img1} assetDiscription={"Total Assets"} assetCount={assetvalue.totalAssets} arrow={uparrow} assetRaise={"7.8% this month"}/>
       <Box assetImage={img2} assetDiscription={"Distributed Assets"} assetCount={assetvalue.distributedAssets} arrow={uparrow} assetRaise={"3.4% this month"}/>

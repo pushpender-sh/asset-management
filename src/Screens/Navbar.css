@@ -43,6 +43,10 @@
 .assetslist:hover, .employerlist:hover, .accessedby:hover{
     cursor: pointer;
 }
+.assetslist:active{
+    color: black;
+    font-weight: bolder;
+}
 
 .left-items{
     display: flex;

@@ -3,11 +3,13 @@ import './Navbar.css'
 import { useAuth } from '../Screens/GlobalContext'
 import topLogo from '../Images/topLogo.png'
 import women from '../Images/women.png'
+import arrowdown from '../Images/arrowdown.jpg'
+
 
 
 export default function Navbar() {
 
-    const { navigate} = useAuth();
+    const { setToken,  navigate} = useAuth();
 
   return (
     <div className='navbar'>
@@ -40,6 +42,8 @@ export default function Navbar() {
       <div className='profile'>
         <div style={{fontWeight:"bold"}}> Nitya Jain</div>
         <img src={women} alt="women" style={{borderRadius: "100%"}} />
+        <img src={arrowdown} alt="" />
+
       </div>
     </div>
   )

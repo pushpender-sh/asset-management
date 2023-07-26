@@ -1,4 +1,8 @@
-header-field{
-    margin-top: 10rem;
+.header-field{
+    padding-top: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }
 

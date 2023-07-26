@@ -9,7 +9,9 @@ import cross from '../Images/cross.png'
 export default function AssetLists() {
   return (
     <div className='top-div'>
-    {/* <Navbar/> */}
+        <div className='navbar'>
+    <Navbar/>
+        </div>
         <div className='header-field'>
             <img src={search} alt="" />
             <input type="text" placeholder='Search' />

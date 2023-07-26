@@ -1,13 +1,18 @@
 import React from 'react'
 import './Navbar.css'
+import { useAuth } from '../Screens/GlobalContext'
 import topLogo from '../Images/topLogo.png'
 import women from '../Images/women.png'
 
+
 export default function Navbar() {
+
+    const { navigate} = useAuth();
+
   return (
     <div className='navbar'>
         <div className='left-items'>
-        <div className='left-img'>
+        <div className='left-img' >
         <img src={topLogo} alt="top-left-logo" style={{height: "45px"}}  /> 
         <div className='logo-title'>
             <div className='upper-title'>
@@ -20,15 +25,15 @@ export default function Navbar() {
         </div>
         </div>
 
-      <div className='items'>
+      <div className='items assetslist' onClick={()=>navigate('/dashboard/assetlists')} >
         Assets List
       </div>
 
-      <div className='items'>
+      <div className='items employerlist'>
         Employer List
       </div>
 
-      <div className='items'>
+      <div className='items accessedby'>
         Accessed By
       </div>
       </div>

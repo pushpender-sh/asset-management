@@ -1,6 +1,6 @@
 // import React, { useEffect } from 'react';
 import { useAuth } from './GlobalContext';
-import Navbar from '../Components/Navbar';
+import Navbar from './Navbar';
 import './DashBoard.css';
 import CircularProgress from '@mui/material/CircularProgress';
 

@@ -18,6 +18,11 @@
     font-weight: bold;
     padding: 8px;
 }
+
+.left-img:hover{
+    cursor: pointer;
+}
+
 .line{
     border: 0.5px solid #7737FF;
     height: 0px;
@@ -33,6 +38,10 @@
     font-family: Roboto;
     font-weight: bold;
     font-size: 17px;
+}
+
+.assetslist:hover, .employerlist:hover, .accessedby:hover{
+    cursor: pointer;
 }
 
 .left-items{

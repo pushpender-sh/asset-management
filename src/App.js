@@ -3,14 +3,16 @@ import './App.css';
 import Login from './Screens/Login';
 import DashBoard from './Screens/DashBoard';
 import { AuthProvider } from './Screens/GlobalContext';
+import AssetLists from './Screens/AssetLists';
 
 function App() {
   return (
     <div className="App">
         <AuthProvider>
       <Routes>
-        <Route path='/dashboard' element={<DashBoard/>}></Route>
         <Route path='/' element={<Login/>}></Route>
+        <Route path='/dashboard' element={<DashBoard/>}></Route>
+        <Route path='/dashboard/assetlists' element={<AssetLists/>}></Route>
       </Routes>
         </AuthProvider>
     </div>

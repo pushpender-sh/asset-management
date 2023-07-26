@@ -4,12 +4,10 @@ import Button from '@mui/material/Button'
 import { useAuth } from './GlobalContext'
 import loginImage from '../Images/loginPageImage.jpg'
 
-import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
-const navigate = useNavigate('')
   // const [token, setToken] = useState('');       
-  const {setToken} = useAuth();
+  const {setToken, navigate} = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

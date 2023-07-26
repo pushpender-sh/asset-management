@@ -8,6 +8,9 @@ import img1 from '../Images/img1.png'
 import img2 from '../Images/img2.png'
 import img3 from '../Images/img3.png'
 
+import uparrow from '../Images/uparrow.svg'
+
+
 import laptop from '../Images/laptop.jpg'
 import mouse from '../Images/mouse.jpg'
 import harddrive from '../Images/harddrive.jpg'
@@ -17,7 +20,7 @@ import sim from '../Images/sim.jpg'
 
 
 
-function Box({assetImage, assetDiscription, assetCount, assetRaise}){
+function Box({assetImage, assetDiscription, assetCount, arrow, assetRaise}){
     return(
         <div className='box'>
             <div className='imagediv'>
@@ -26,7 +29,7 @@ function Box({assetImage, assetDiscription, assetCount, assetRaise}){
              <div className='asset-details '>
                <div style={{fontSize:"17px"}}> {assetDiscription}</div>
                <div style={{fontSize:"40px", fontWeight:"bold"}}> {assetCount} </div>
-                <div style={{fontSize:"13px"}}>{assetRaise}</div>
+                <div className='raisevalue' style={{fontSize:"13px"}}> <img src={arrow} alt="" height="12px" />{assetRaise}</div>
              </div>
         </div>
     )
@@ -64,10 +67,10 @@ export default function Dashboard() {
       <Navbar/>
 
       <div className='asset-boxes'>
-      <Box assetImage={img1} assetDiscription={"Total Assets"} assetCount={assetvalue.totalAssets} assetRaise={"7.8% this month"}/>
-      <Box assetImage={img2} assetDiscription={"Distributed Assets"} assetCount={assetvalue.distributedAssets} assetRaise={"3.4% this month"}/>
+      <Box assetImage={img1} assetDiscription={"Total Assets"} assetCount={assetvalue.totalAssets} arrow={uparrow} assetRaise={"7.8% this month"}/>
+      <Box assetImage={img2} assetDiscription={"Distributed Assets"} assetCount={assetvalue.distributedAssets} arrow={uparrow} assetRaise={"3.4% this month"}/>
       <Box assetImage={img3} assetDiscription={"Available Assets"} assetCount={assetvalue.availableAssets} />
-      </div>
+      
 
       <div className='bigcard'>
         
@@ -76,6 +79,7 @@ export default function Dashboard() {
         <div>Categories</div>
         <div>Quantity</div>
       </div>
+
         <div className='below-header-line'></div>
       <Card assetImage={laptop} assetName={"Laptop"} assetCount={assetvalue.laptopQuantity}/>
       <Card assetImage={mouse} assetName={"Mouse"} assetCount={assetvalue.mouseQuantity}/>
@@ -83,7 +87,8 @@ export default function Dashboard() {
       <Card assetImage={pendrive} assetName={"Pen Drive"} assetCount={assetvalue.penDriveQuantity}/>
       <Card assetImage={mobile} assetName={"Mobile"} assetCount={assetvalue.mobileQuantity}/>
       <Card assetImage={sim} assetName={"SIM Card"} assetCount={assetvalue.simQuantity}/>
-      
+
+      </div>
       </div>
     </div>
   );

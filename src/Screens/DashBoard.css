@@ -27,6 +27,9 @@
 .box:hover .imagediv{
     background-color: #FFF;
 }
+/* .box:hover .raisevalue{
+    background-color: #6200EE;
+} */
 
 .asset-boxes{
     display: flex;
@@ -53,14 +56,16 @@
 
 .card{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
+    padding-left: 80px;
+    padding-right: 80px;
 }
 
 .bigcard{
     height: 600px;
-    width: 800px;
+    width: 80%;
     flex-shrink: 0;
     background-color: #FFF;
     border-radius: 1rem;
@@ -70,12 +75,15 @@
 
 .card-header{
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 2rem;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-left: 88px;
+    padding-right: 80px;
+    color: grey;
 }
 
 .below-header-line{
-    border: 0.2px solid grey;
+    border: 1px solid rgb(236, 231, 231);
     height: 0px;
     width: auto;
     margin-bottom: 1rem; 

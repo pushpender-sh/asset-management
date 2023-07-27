@@ -8,7 +8,13 @@ import cross from '../Images/cross.png'
 import plus from '../Images/plus.png'
 import CircularProgress from '@mui/material/CircularProgress';
 
-function DataEntries({ assetDetails }) {
+function DataEntries({ assetDetails, input }) {
+  const filteredAssets = input
+    ? assetDetails.filter((item) =>
+        item.AssetType.toLowerCase().includes(input.toLowerCase())
+      )
+    : assetDetails;
+
   return (
     <table className='entries-table'>
       <thead className='heading-row'>
@@ -25,7 +31,7 @@ function DataEntries({ assetDetails }) {
         </tr>
       </thead>
       <tbody>
-        {assetDetails.map((value) => (
+        {filteredAssets.map((value) => (
           <tr key={value.serialNo}>
             <td>{value.brand}</td>
             <td>{value.model}</td>
@@ -52,10 +58,9 @@ function DataTable({input, setInput, assetDetails}){
             <img src={search} alt="" />
             <input className='inputfield' value={input} type="text" placeholder='Search' 
             onChange={(e)=>setInput(e.target.value)}
-            // const filterValue= {assetDetails.map((value)=>{console.log(value.AssetType)})}
 
             />
-            <img src={cross} alt="" />
+            <img className='cross' src={cross} alt="" onClick={()=>setInput('')}/>
             </div>
 
             <div className=' right-elements'>
@@ -64,7 +69,7 @@ function DataTable({input, setInput, assetDetails}){
               <fieldset>
                 <legend> Asset Type</legend>
               <select name="Asset Type" id="">
-                <option hidden value="">All</option>
+                <option value="">All</option>
                 <option value="">Laptop</option>
                 <option value="">Mouse</option>
                 <option value="">Pen Drive</option>
@@ -90,7 +95,7 @@ function DataTable({input, setInput, assetDetails}){
         </div>
 
          <div>
-          <DataEntries assetDetails={assetDetails} />
+          <DataEntries assetDetails={assetDetails} input={input} />
          </div>
 
         </div>
@@ -99,7 +104,7 @@ function DataTable({input, setInput, assetDetails}){
 
 export default function AssetLists() {
     const [input, setInput]= useState('')
-    const { assetDetails,  navigate} = useAuth();
+    const { assetDetails} = useAuth();
     // console.log(assetDetails);
     if(!assetDetails){
       return(

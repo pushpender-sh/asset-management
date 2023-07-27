@@ -67,7 +67,7 @@ export const AuthProvider=({children})=>{
             }
     
             const data = await response.json();
-            setAssetDetails(data);
+            setAssetDetails(data.GetAsset);
             // console.log(data.totalAssets);
             // console.log(assetvalue );
             

@@ -6,6 +6,7 @@
     margin-right: 5rem;
     padding-bottom: 5rem;
     border-radius: 1rem;
+    overflow-x: auto;
 
 }
 
@@ -78,19 +79,39 @@ button{
 .left-elements{
     border-bottom: 1px solid black;
 }
-.right-elements{
+/* .right-elements{
     flex-wrap: wrap;
-}
+} */
 
 
 .heading-row{
-    margin-top: 1rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    
     background-color: #E0CCFC;
     border-bottom: 0.5px solid grey;
     border-top: 0.5px solid grey;
 }
+
+/* .entries{
+    display: flex;
+    justify-content: space-around;
+}
+
+.data{
+    display: flex;
+    text-align: left;
+    width: 100px;
+} */
+
+
+
+.entries-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .entries-table th, .entries-table td {
+    padding: 8px;
+    text-align: left;
+  }
+  

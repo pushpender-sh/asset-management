@@ -8,13 +8,41 @@ import cross from '../Images/cross.png'
 import plus from '../Images/plus.png'
 import CircularProgress from '@mui/material/CircularProgress';
 
-function DataEntries({assetDetails}){
-  return(
-    <div>
-      
-    </div>
-  )
+function DataEntries({ assetDetails }) {
+  return (
+    <table className='entries-table'>
+      <thead className='heading-row'>
+        <tr>
+          <th>Make</th>
+          <th>Model</th>
+          <th>Serial Number</th>
+          <th>Asset Type</th>
+          <th>Date Purchased</th>
+          <th>Warranty Start Date</th>
+          <th>Warranty Expires</th>
+          <th>Assigned To</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {assetDetails.map((value) => (
+          <tr key={value.serialNo}>
+            <td>{value.brand}</td>
+            <td>{value.model}</td>
+            <td>{value.serialNo}</td>
+            <td>{value.AssetType}</td>
+            <td>{value.purchasedDate}</td>
+            <td>{value.warrantyStartDate}</td>
+            <td>{value.warrantyExpiryDate}</td>
+            <td>{value.assignedTo}</td>
+            <td>{value.status}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
 }
+
 
 function DataTable({input, setInput, assetDetails}){
   return(
@@ -61,18 +89,6 @@ function DataTable({input, setInput, assetDetails}){
             </div>
         </div>
 
-        <div className='heading-row'>
-          <div>Make</div>
-          <div>Model</div>
-          <div>Serial Number</div>
-          <div>Asset Type</div>
-          <div>Date Purchased</div>
-          <div>Warranry Start Date</div>
-          <div>Warranty Expires</div>
-          <div>Assigned To</div>
-          <div>Action</div>
-
-        </div>
          <div>
           <DataEntries assetDetails={assetDetails} />
          </div>

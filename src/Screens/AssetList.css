@@ -52,6 +52,10 @@ select{
 
 }
 
+select:focus {
+    outline: none;
+  }
+
 fieldset{
     height: 40px;
     width: 100px;

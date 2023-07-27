@@ -8,12 +8,10 @@ import cross from '../Images/cross.png'
 import plus from '../Images/plus.png'
 import CircularProgress from '@mui/material/CircularProgress';
 
-function DataEntries({ assetDetails, input }) {
-  const filteredAssets = input
-    ? assetDetails.filter((item) =>
-        item.AssetType.toLowerCase().includes(input.toLowerCase())
-      )
-    : assetDetails;
+function DataEntries({filteredAssets }) {
+  
+  
+    // console.log(filteredAssets)
 
   return (
     <table className='entries-table'>
@@ -32,7 +30,7 @@ function DataEntries({ assetDetails, input }) {
       </thead>
       <tbody>
         {filteredAssets.map((value) => (
-          <tr key={value.serialNo}>
+          <tr key={value.id}>
             <td>{value.brand}</td>
             <td>{value.model}</td>
             <td>{value.serialNo}</td>
@@ -50,21 +48,42 @@ function DataEntries({ assetDetails, input }) {
 }
 
 
-function DataTable({input, setInput, assetDetails}){
+function DataTable({assetDetails}){
+  const [input, setInput]= useState('')
+  const [checked, setChecked]= useState('')
+  const [filteredAssets, setFilteredAssets]= useState(assetDetails)
+
+
+  function handleSearchChange(){
+    const filter = input 
+    ? assetDetails.filter((item) =>
+        item.AssetType.toLowerCase().includes(input.toLowerCase())
+      )
+    : assetDetails;
+
+    setFilteredAssets(filter)
+    
+  }
+
   return(
     <div className='table'>
     <div className='header-field'>
           <div className='left-elements'>
             <img src={search} alt="" />
             <input className='inputfield' value={input} type="text" placeholder='Search' 
-            onChange={(e)=>setInput(e.target.value)}
+            onChange={(e)=>
+              {setInput
+            (e.target.value)
+            handleSearchChange()
+          }
+            }
 
             />
             <img className='cross' src={cross} alt="" onClick={()=>setInput('')}/>
             </div>
 
             <div className=' right-elements'>
-              <div><input type="checkbox" /> Available </div>
+              <div><input value={checked} type="checkbox" onChange={(e)=>{setChecked(e.target.checked)}} /> Available </div>
               
               <fieldset>
                 <legend> Asset Type</legend>
@@ -95,7 +114,7 @@ function DataTable({input, setInput, assetDetails}){
         </div>
 
          <div>
-          <DataEntries assetDetails={assetDetails} input={input} />
+          <DataEntries assetDetails={assetDetails} input={input} checked={checked} filteredAssets={filteredAssets} />
          </div>
 
         </div>
@@ -103,7 +122,7 @@ function DataTable({input, setInput, assetDetails}){
 }
 
 export default function AssetLists() {
-    const [input, setInput]= useState('')
+    
     const { assetDetails} = useAuth();
     // console.log(assetDetails);
     if(!assetDetails){
@@ -118,7 +137,7 @@ export default function AssetLists() {
     <div>  
     <Navbar/>
     <div style={{paddingTop:'1px'}}>
-        <DataTable input={input} setInput={setInput} assetDetails={assetDetails} />
+        <DataTable assetDetails={assetDetails} />
     </div>
     </div>
   )

@@ -1,12 +1,13 @@
 import React from 'react'
 import './AssetList.css'
 import { useAuth } from '../Screens/GlobalContext'
-
+import Modals from './Modals'
 import Navbar from './Navbar'
 import search from '../Images/search.jpg'
 import cross from '../Images/cross.png'
 import plus from '../Images/plus.png'
 import CircularProgress from '@mui/material/CircularProgress';
+
 
 function DataEntries({assetDetails }) {
   
@@ -49,7 +50,9 @@ function DataEntries({assetDetails }) {
   );
 }
 
-const HandleAddAssets=({setIsbuttonopen})=>{
+const HandleAddAssets=({setIsbuttonopen, selectedValue, setSelectedValue})=>{
+
+  
 
   return(
     <div className='addnewasset'>
@@ -60,16 +63,18 @@ const HandleAddAssets=({setIsbuttonopen})=>{
 
       <div className='assignasset'>
          <div style={{color:"#6200EE", fontSize:"20px", fontWeight:"bolder"}}>Assign Asset </div>
-        <select className='assignasset-select' name="" id="" >
+        <select value={selectedValue} onChange={(e)=>setSelectedValue(e.target.value)} className='assignasset-select' name="" id="" >
               <option value="All">All</option>
               <option value="Laptop">Laptop</option>
               <option value="Mouse">Mouse</option>
-              <option value="Pen Drive">Pen Drive</option>
-              <option value="Hard Drive">Hard Drive</option>
+              <option value="PenDrive">Pen Drive</option>
+              <option value="HardDrive">Hard Drive</option>
               <option value="Mobile">Mobile</option>
-              <option value="SIM Card">SIM Card</option>
+              <option value="SIMCard">SIM Card</option>
         </select>
-       
+     {/* {console.log(selectedValue)} */}
+         
+       <Modals/>
 
         
       </div>
@@ -147,7 +152,7 @@ function DataTable({assetDetails, input, setInput, checked, setChecked, isbutton
 
 export default function AssetLists() {
     
-    const { input, setInput, checked, setChecked, isbuttonopen, setIsbuttonopen, assetDetails} = useAuth();
+    const { input, setInput, checked, setChecked, isbuttonopen, setIsbuttonopen, assetDetails, selectedValue, setSelectedValue} = useAuth();
     // console.log(assetDetails);
     if(!assetDetails){
       return(
@@ -162,7 +167,7 @@ export default function AssetLists() {
     <Navbar/>
     <div style={{paddingTop:'1px'}}>
         <DataTable input={input} setInput={setInput} checked={checked} setChecked={setChecked} isbuttonopen={isbuttonopen} setIsbuttonopen={setIsbuttonopen} assetDetails={assetDetails} />
-         <div className='addassetPopup'>{isbuttonopen && <HandleAddAssets setIsbuttonopen={setIsbuttonopen}/>} </div>
+         <div className='addassetPopup'>{isbuttonopen && <HandleAddAssets setIsbuttonopen={setIsbuttonopen} selectedValue={selectedValue} setSelectedValue={setSelectedValue}/>} </div>
     </div>
     </div>
   )

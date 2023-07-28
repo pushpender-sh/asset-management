@@ -1,0 +1,29 @@
+.row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 2rem;
+}
+
+.lines{
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+    text-align: left;
+}
+
+.modalinputfield{
+        height: 40px;
+        width: 150px;
+        /* background-color: #1e0a4d; */
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+.modalselect{
+    height: 40px;
+    width: 150px;
+    /* background-color: #1e0a4d; */
+    border-radius: 5px;
+    padding: 10px;
+}

@@ -7,7 +7,7 @@
     right: 0;
     z-index:1;
     background-color: white;
-    
+    /* flex-wrap: wrap; */
 
 }
 .left-img{
@@ -58,10 +58,18 @@
     align-items: center;
     justify-content: center;
     margin-right: 30px;
+    flex-wrap: wrap;
 }
 
 .logout{
-    background-color: #7737FF;
+    background-color:white;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.24);
+    padding: 5px;
+    border: 1px solid grey;
+    
+    
+    
+
 }
 .logout:hover{
     cursor: pointer;

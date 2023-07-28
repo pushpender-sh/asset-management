@@ -61,7 +61,7 @@ const HandleAddAssets=({setIsbuttonopen})=>{
       <div className='assignasset'>
          <div style={{color:"#6200EE", fontSize:"20px", fontWeight:"bolder"}}>Assign Asset </div>
         <select className='assignasset-select' name="" id="" >
-        <option value="">All</option>
+              <option value="">All</option>
               <option value="">Laptop</option>
               <option value="">Mouse</option>
               <option value="">Pen Drive</option>
@@ -69,6 +69,8 @@ const HandleAddAssets=({setIsbuttonopen})=>{
               <option value="">Mobile</option>
               <option value="">SIM Card</option>
         </select>
+
+        
       </div>
     </div>
   )

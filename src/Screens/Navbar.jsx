@@ -1,19 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Navbar.css'
 import { useAuth } from '../Screens/GlobalContext'
 import topLogo from '../Images/topLogo.png'
 import women from '../Images/women.png'
 import arrowdown from '../Images/arrowdown.jpg'
 
+function Logout({setToken, navigate}){
+    function handlebacktologin(){
+      localStorage.removeItem('token')
+          setToken('')
+          navigate('/')
+    }
+  
+  return(
+    <div className='logout' onClick={handlebacktologin}>
+      Logout 
+    </div>
+  )
+}
 
 export default function Navbar() {
 
     const { setToken,  navigate} = useAuth();
+    const [dropDown, setDropDown] = useState(false)
 
     const handleLogout=()=>{
-      localStorage.removeItem('token')
-      setToken('')
-      navigate('/')
+      if(dropDown) setDropDown(false)
+      else setDropDown(true)
     }
 
   return (
@@ -47,8 +60,8 @@ export default function Navbar() {
       <div className='profile'>
         <div style={{fontWeight:"bold"}}> Nitya Jain</div>
         <img src={women} alt="women" style={{borderRadius: "100%"}} />
-        <img onClick={handleLogout} src={arrowdown} alt="" className='logout' />
-
+        <img onClick={handleLogout} src={arrowdown} alt="" className='logoutbutton' />
+        <div>{ dropDown && <Logout setToken={setToken} navigate={navigate}/> }</div>  
       </div>
     </div>
   )

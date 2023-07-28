@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './AssetList.css'
 import { useAuth } from '../Screens/GlobalContext'
 
@@ -8,7 +8,7 @@ import cross from '../Images/cross.png'
 import plus from '../Images/plus.png'
 import CircularProgress from '@mui/material/CircularProgress';
 
-function DataEntries({filteredAssets }) {
+function DataEntries({assetDetails }) {
   
   
     // console.log(filteredAssets)
@@ -29,41 +29,29 @@ function DataEntries({filteredAssets }) {
         </tr>
       </thead>
       <tbody>
-        {filteredAssets.map((value) => (
+        {assetDetails.map((value) => (
           <tr key={value.id}>
-            <td>{value.brand}</td>
+            <td style={{color:"#6200EE"}}>{value.brand}</td>
             <td>{value.model}</td>
             <td>{value.serialNo}</td>
-            <td>{value.AssetType}</td>
+            <td className='assettype'>{value.AssetType}</td>
             <td>{value.purchasedDate}</td>
             <td>{value.warrantyStartDate}</td>
             <td>{value.warrantyExpiryDate}</td>
             <td>{value.assignedTo}</td>
             <td>{value.status}</td>
           </tr>
+
         ))}
+
       </tbody>
     </table>
   );
 }
 
 
-function DataTable({assetDetails}){
-  const [input, setInput]= useState('')
-  const [checked, setChecked]= useState('')
-  const [filteredAssets, setFilteredAssets]= useState(assetDetails)
-
-
-  function handleSearchChange(){
-    const filter = input 
-    ? assetDetails.filter((item) =>
-        item.AssetType.toLowerCase().includes(input.toLowerCase())
-      )
-    : assetDetails;
-
-    setFilteredAssets(filter)
-    
-  }
+function DataTable({assetDetails, input, setInput, checked, setChecked,}){
+  
 
   return(
     <div className='table'>
@@ -73,9 +61,7 @@ function DataTable({assetDetails}){
             <input className='inputfield' value={input} type="text" placeholder='Search' 
             onChange={(e)=>
               {setInput
-            (e.target.value)
-            handleSearchChange()
-          }
+            (e.target.value)  }
             }
 
             />
@@ -114,7 +100,7 @@ function DataTable({assetDetails}){
         </div>
 
          <div>
-          <DataEntries assetDetails={assetDetails} input={input} checked={checked} filteredAssets={filteredAssets} />
+          <DataEntries assetDetails={assetDetails} input={input} checked={checked}  />
          </div>
 
         </div>
@@ -123,7 +109,7 @@ function DataTable({assetDetails}){
 
 export default function AssetLists() {
     
-    const { assetDetails} = useAuth();
+    const { input, setInput, checked, setChecked, assetDetails} = useAuth();
     // console.log(assetDetails);
     if(!assetDetails){
       return(
@@ -137,7 +123,7 @@ export default function AssetLists() {
     <div>  
     <Navbar/>
     <div style={{paddingTop:'1px'}}>
-        <DataTable assetDetails={assetDetails} />
+        <DataTable input={input} setInput={setInput} checked={checked} setChecked={setChecked} assetDetails={assetDetails} />
     </div>
     </div>
   )

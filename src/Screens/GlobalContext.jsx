@@ -8,6 +8,8 @@ export const AuthProvider=({children})=>{
     const[token, setToken]= useState('');
     const[assetvalue, setAssetvalue]=useState();
     const[assetDetails, setAssetDetails]=useState();
+    const [input, setInput]= useState('')
+    const [checked, setChecked]= useState('')
 
     const navigate = useNavigate('')
 
@@ -54,7 +56,11 @@ export const AuthProvider=({children})=>{
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await fetch('https://devassetapi.remotestate.com/asset-management/user/asset/', {
+            const params={
+              name: input,
+              limit:10
+            }
+            const response = await fetch(`https://devassetapi.remotestate.com/asset-management/user/asset?${new URLSearchParams(params).toString()}`, {
               method: 'GET',
               headers: {
                 'Authorization': token,
@@ -75,15 +81,23 @@ export const AuthProvider=({children})=>{
             console.error(error);
           }
         };
+        const timer = setTimeout(async () => {
+          fetchData()
+        }, 1000);
+  
+        return () => {
+          clearTimeout(timer);
+        };
     
-        fetchData();
-      }, [token]);
+        // fetchData();
+      }, [token, input ]);
 
 
 
 
     return(
-        <AuthContext.Provider value={{token, setToken, assetvalue, navigate, assetDetails,}}>
+        <AuthContext.Provider value={{token, setToken, assetvalue, navigate,
+                              assetDetails,input, setInput, checked,setChecked}}>
             {children}
         </AuthContext.Provider>
     );

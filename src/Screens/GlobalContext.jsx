@@ -9,7 +9,7 @@ export const AuthProvider=({children})=>{
     const[assetvalue, setAssetvalue]=useState();
     const[assetDetails, setAssetDetails]=useState();
     const [input, setInput]= useState('')
-    const [checked, setChecked]= useState('')
+    const [checked, setChecked]= useState(false)
 
     const navigate = useNavigate('')
 
@@ -58,6 +58,7 @@ export const AuthProvider=({children})=>{
           try {
             const params={
               name: input,
+              available:checked,
               limit:10
             }
             const response = await fetch(`https://devassetapi.remotestate.com/asset-management/user/asset?${new URLSearchParams(params).toString()}`, {
@@ -90,7 +91,7 @@ export const AuthProvider=({children})=>{
         };
     
         // fetchData();
-      }, [token, input ]);
+      }, [token, input, checked ]);
 
 
 

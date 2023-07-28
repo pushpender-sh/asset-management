@@ -60,8 +60,7 @@ function DataTable({assetDetails, input, setInput, checked, setChecked,}){
             <img src={search} alt="" />
             <input className='inputfield' value={input} type="text" placeholder='Search' 
             onChange={(e)=>
-              {setInput
-            (e.target.value)  }
+              {setInput(e.target.value)}
             }
 
             />

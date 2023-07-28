@@ -49,8 +49,43 @@ function DataEntries({assetDetails }) {
   );
 }
 
+const HandleAddAssets=({setIsbuttonopen})=>{
 
-function DataTable({assetDetails, input, setInput, checked, setChecked,}){
+  return(
+    <div className='addnewasset'>
+      <div className='addassetheader'>
+      <div>Asset Details</div>
+      <img src={cross} alt="" onClick={()=>setIsbuttonopen(false)}/>
+      </div>
+
+      <div className='assignasset'>
+         <div style={{color:"#6200EE", fontSize:"20px", fontWeight:"bolder"}}>Assign Asset </div>
+        <select className='assignasset-select' name="" id="" >
+        <option value="">All</option>
+              <option value="">Laptop</option>
+              <option value="">Mouse</option>
+              <option value="">Pen Drive</option>
+              <option value="">Hard Drive</option>
+              <option value="">Mobile</option>
+              <option value="">SIM Card</option>
+        </select>
+      </div>
+    </div>
+  )
+}
+
+function DataTable({assetDetails, input, setInput, checked, setChecked, isbuttonopen, setIsbuttonopen}){
+
+  const handleButtonClick = () => {
+    if (isbuttonopen) {
+      setIsbuttonopen(false)
+    } else {
+      setIsbuttonopen(true);
+    }
+  };
+
+
+  
   
 
   return(
@@ -72,7 +107,7 @@ function DataTable({assetDetails, input, setInput, checked, setChecked,}){
               
               <fieldset>
                 <legend> Asset Type</legend>
-              <select name="Asset Type" id="">
+              <select className='tableselects' name="Asset Type" id="">
                 <option value="">All</option>
                 <option value="">Laptop</option>
                 <option value="">Mouse</option>
@@ -85,7 +120,7 @@ function DataTable({assetDetails, input, setInput, checked, setChecked,}){
 
               <fieldset>
                 <legend> Warranty</legend>
-              <select name="Warranty" id="">
+              <select className='tableselects' name="Warranty" id="">
                 <option disabled hidden value="">Warranty</option>
                 <option value="">None</option>
                 <option value="">Expires in 1 months</option>
@@ -94,12 +129,13 @@ function DataTable({assetDetails, input, setInput, checked, setChecked,}){
                 <option value="">Expired</option>
               </select>
               </fieldset>
-              <button  > <img src={plus} alt="" />Add Asset</button>
+              <button className='addassetbutton' onClick={handleButtonClick} > <img src={plus} alt="" />Add Asset</button>
             </div>
         </div>
 
          <div>
           <DataEntries assetDetails={assetDetails} input={input} checked={checked}  />
+          
          </div>
 
         </div>
@@ -108,7 +144,7 @@ function DataTable({assetDetails, input, setInput, checked, setChecked,}){
 
 export default function AssetLists() {
     
-    const { input, setInput, checked, setChecked, assetDetails} = useAuth();
+    const { input, setInput, checked, setChecked, isbuttonopen, setIsbuttonopen, assetDetails} = useAuth();
     // console.log(assetDetails);
     if(!assetDetails){
       return(
@@ -122,7 +158,8 @@ export default function AssetLists() {
     <div>  
     <Navbar/>
     <div style={{paddingTop:'1px'}}>
-        <DataTable input={input} setInput={setInput} checked={checked} setChecked={setChecked} assetDetails={assetDetails} />
+        <DataTable input={input} setInput={setInput} checked={checked} setChecked={setChecked} isbuttonopen={isbuttonopen} setIsbuttonopen={setIsbuttonopen} assetDetails={assetDetails} />
+         <div className='addassetPopup'>{isbuttonopen && <HandleAddAssets setIsbuttonopen={setIsbuttonopen}/>} </div>
     </div>
     </div>
   )

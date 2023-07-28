@@ -7,21 +7,21 @@
     padding-bottom: 5rem;
     border-radius: 1rem;
     overflow-x: auto;
+    margin-top: 5rem;
 
 }
 
 .header-field{
     /* padding-top: 5rem; */
+    /* margin-top: 5rem; */
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    margin-top: 5rem;
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 10px;
     padding-bottom: 10px;
-    /* width: 80%; */
     flex-wrap: wrap;
 }
 
@@ -40,7 +40,7 @@
     outline: none;
 }
 
-select{
+.tableselects{
     height: 20px;
     width: 100px;
     background-color: white;
@@ -78,6 +78,13 @@ button{
      margin-left: 10px;;
      border-radius: 5px;
 }
+
+/* option{
+    background-color: white;
+    filter: drop-shadow(0px 14px 30px rgba(0, 0, 0, 0.12));
+    
+
+} */
 
 .left-elements, .right-elements{
     display: flex;
@@ -120,6 +127,8 @@ button{
    margin-top: 6px;
 }
 
+
+
 .entries-table {
     width: 100%;
     border-collapse: collapse;
@@ -131,3 +140,48 @@ button{
     text-align: left;
   }
  
+.addassetbutton:hover{
+    cursor: pointer;
+}
+
+.addnewasset{
+    height: 200px;
+    width: 400px;
+    padding: 15px;
+    border-radius: 5px;
+
+    background-color: white;  
+    /* height: 10px; */
+    z-index: 10;
+    /* filter: drop-shadow(0px 14px 30px rgba(0, 0, 0, 0.12)); */
+    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgb(255, 255, 255),
+    3em 3em 3em 130em rgba(0, 0, 0, 0.3);
+}
+
+.addassetheader{
+    display: flex;
+    justify-content: space-between;
+}
+.assignasset{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 1rem;
+}
+.assignasset-select{
+    height: 50px;
+    width: 300px;
+    background-color: #EDEAF4;
+    border-radius: 5px;
+    padding: 10px;
+    
+
+}
+.addassetPopup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -450px; 
+}

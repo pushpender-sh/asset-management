@@ -10,6 +10,7 @@ export const AuthProvider=({children})=>{
     const[assetDetails, setAssetDetails]=useState();
     const [input, setInput]= useState('')
     const [checked, setChecked]= useState(false)
+    const [isbuttonopen, setIsbuttonopen] = useState(false)
 
     const navigate = useNavigate('')
 
@@ -98,7 +99,9 @@ export const AuthProvider=({children})=>{
 
     return(
         <AuthContext.Provider value={{token, setToken, assetvalue, navigate,
-                              assetDetails,input, setInput, checked,setChecked}}>
+                              assetDetails,input, setInput, checked,setChecked,
+                              isbuttonopen, setIsbuttonopen
+                              }}>
             {children}
         </AuthContext.Provider>
     );

@@ -54,21 +54,22 @@ const HandleAddAssets=({setIsbuttonopen})=>{
   return(
     <div className='addnewasset'>
       <div className='addassetheader'>
-      <div>Asset Details</div>
+      <div style={{fontWeight:"bold"}}>Asset Details</div>
       <img src={cross} alt="" onClick={()=>setIsbuttonopen(false)}/>
       </div>
 
       <div className='assignasset'>
          <div style={{color:"#6200EE", fontSize:"20px", fontWeight:"bolder"}}>Assign Asset </div>
         <select className='assignasset-select' name="" id="" >
-              <option value="">All</option>
-              <option value="">Laptop</option>
-              <option value="">Mouse</option>
-              <option value="">Pen Drive</option>
-              <option value="">Hard Drive</option>
-              <option value="">Mobile</option>
-              <option value="">SIM Card</option>
+              <option value="All">All</option>
+              <option value="Laptop">Laptop</option>
+              <option value="Mouse">Mouse</option>
+              <option value="Pen Drive">Pen Drive</option>
+              <option value="Hard Drive">Hard Drive</option>
+              <option value="Mobile">Mobile</option>
+              <option value="SIM Card">SIM Card</option>
         </select>
+       
 
         
       </div>

@@ -11,7 +11,7 @@ export const AuthProvider=({children})=>{
     const [input, setInput]= useState('')
     const [checked, setChecked]= useState(false)
     const [isbuttonopen, setIsbuttonopen] = useState(false)
-    
+
 
     const navigate = useNavigate('')
 
@@ -86,7 +86,7 @@ export const AuthProvider=({children})=>{
         };
         const timer = setTimeout(async () => {
           fetchData()
-        }, 1000);
+        }, 300);
   
         return () => {
           clearTimeout(timer);

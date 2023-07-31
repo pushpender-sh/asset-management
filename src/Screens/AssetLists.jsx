@@ -7,13 +7,12 @@ import search from '../Images/search.jpg'
 import cross from '../Images/cross.png'
 import plus from '../Images/plus.png'
 import CircularProgress from '@mui/material/CircularProgress';
+import ToggleButton from '@mui/material/ToggleButton';
 
 
 function DataEntries({assetDetails }) {
-  
-  
-    // console.log(filteredAssets)
 
+    // console.log(filteredAssets)
   return (
     <table className='entries-table'>
       <thead className='heading-row'>
@@ -27,6 +26,7 @@ function DataEntries({assetDetails }) {
           <th>Warranty Expires</th>
           <th>Assigned To</th>
           <th>Status</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -41,6 +41,7 @@ function DataEntries({assetDetails }) {
             <td>{value.warrantyExpiryDate}</td>
             <td>{value.assignedTo}</td>
             <td>{value.status}</td>
+            <td><ToggleButton style={{height:"40px", width:"40px", fontWeight:"bolder"}}>...</ToggleButton></td>
           </tr>
 
         ))}
@@ -75,10 +76,7 @@ const HandleAddAssets=({setIsbuttonopen, selectedValue, setSelectedValue, addedD
               <option value="sim">SIM Card</option>
         </select>
      {/* {console.log(selectedValue)} */}
-         
-       <Modals/>
-
-        
+       <Modals/>     
       </div>
     </div>
   )
@@ -93,10 +91,6 @@ function DataTable({assetDetails, input, setInput, checked, setChecked, isbutton
       setIsbuttonopen(true);
     }
   };
-
-
-  
-  
 
   return(
     <div className='table'>

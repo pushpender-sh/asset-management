@@ -58,13 +58,15 @@ const HandleAddAssets=({setIsbuttonopen, selectedValue, setSelectedValue})=>{
     <div className='addnewasset'>
       <div className='addassetheader'>
       <div style={{fontWeight:"bold"}}>Asset Details</div>
-      <img className='cross' src={cross} alt="" onClick={()=>setIsbuttonopen(false)}/>
+      <img className='cross' src={cross} alt="" onClick={()=>{
+        setIsbuttonopen(false)
+       setSelectedValue("None")}}/>
       </div>
 
       <div className='assignasset'>
          <div style={{color:"#6200EE", fontSize:"20px", fontWeight:"bolder"}}>Assign Asset </div>
         <select value={selectedValue} onChange={(e)=>setSelectedValue(e.target.value)} className='assignasset-select' name="" id="" >
-              <option value="All">All</option>
+              <option value="All">None</option>
               <option value="Laptop">Laptop</option>
               <option value="Mouse">Mouse</option>
               <option value="PenDrive">Pen Drive</option>

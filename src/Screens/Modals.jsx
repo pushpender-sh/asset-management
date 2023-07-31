@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './Modals.css'
 import Switch from '@mui/material/Switch';
 import { useAuth } from './GlobalContext'
 
 export default function Modals() {
 
-  const[ownedBy, setOwnedBy]= useState();
 
-  const{selectedValue}= useAuth();
+
+  const{selectedValue,ownedBy, setOwnedBy}= useAuth();
 
   if(selectedValue==="Laptop"){
     return(
@@ -16,7 +16,7 @@ export default function Modals() {
           <div>
         <div>Owned By</div> 
         <select value={ownedBy} onChange={(e)=>setOwnedBy(e.target.value)}  className='modalselect' name="" id="">
-          <option disabled hidden value=""></option>
+          <option  value="" disabled hidden></option>
           <option value="client">Client</option>
           <option value="RemoteState">RemoteState</option>
         </select>
@@ -428,10 +428,5 @@ export default function Modals() {
         </div>
     )
   }
-
-
-
-
-
 
 }

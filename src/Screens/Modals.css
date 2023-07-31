@@ -8,12 +8,15 @@
 .lines{
     display: flex;
     flex-direction: column;
-    row-gap: 0.5rem;
+    row-gap: 0.2rem;
     text-align: left;
+    max-height: 500px;
+    overflow-y: scroll;
+    padding : 15px;
 }
 
 .modalinputfield{
-        height: 40px;
+        height: 20px;
         width: 150px;
         /* background-color: #1e0a4d; */
         border-radius: 5px;
@@ -26,4 +29,9 @@
     /* background-color: #1e0a4d; */
     border-radius: 5px;
     padding: 10px;
+}
+
+.end-buttons{
+   display: flex;
+   justify-content: center;
 }

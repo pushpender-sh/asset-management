@@ -66,7 +66,19 @@ export default function Modals() {
 
         <div className='row'>
           <div>
+          <div>Screen Resolution</div>
+          <input className='modalinputfield' type="text" placeholder='Enter Screen Resolution' />
+          </div>
+          <div>
+          <div>Operationg System</div>
+          <input className='modalinputfield' type="text" placeholder='Enter Operationg System' />
+          </div>
+        </div>
+
+        <div className='row'>
+          <div>
           <div>Date Of Purchase</div>
+          <input className='modalinputfield' type="date" placeholder='dd/mm/yyyy' />
           </div>
           <div>
           <div>Charger</div>
@@ -76,7 +88,13 @@ export default function Modals() {
           </div>
         </div>
 
-      </div>
+        <div className='row'>
+          <button className='end-buttons'>Cancel</button>
+          <button className='end-buttons'>Save</button>
+          </div>
+        </div>
+
+      
     )
   }
 

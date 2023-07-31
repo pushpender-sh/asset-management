@@ -5,9 +5,12 @@ import { useAuth } from './GlobalContext'
 
 export default function Modals() {
 
+  const{selectedValue,ownedBy, setOwnedBy, addedData, setAddedData}= useAuth();
 
-
-  const{selectedValue,ownedBy, setOwnedBy}= useAuth();
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setAddedData  ({ ...addedData, [name]: value });
+  };
 
   if(selectedValue==="Laptop"){
     return(
@@ -15,7 +18,7 @@ export default function Modals() {
         <div className='row'>
           <div>
         <div>Owned By</div> 
-        <select value={ownedBy} onChange={(e)=>setOwnedBy(e.target.value)}  className='modalselect' name="" id="">
+        <select  value={ownedBy} onChange={(e)=>setOwnedBy(e.target.value)}  className='modalselect' name="" id="">
           <option  value="" disabled hidden></option>
           <option value="client">Client</option>
           <option value="RemoteState">RemoteState</option>
@@ -31,7 +34,7 @@ export default function Modals() {
         <div className='row'>
           <div>
           <div>Make</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Brand Name' />
+          <input  className='modalinputfield' type="text" placeholder='Enter Brand Name' />
           </div>
           <div>
           <div>Model</div>

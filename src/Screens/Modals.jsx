@@ -5,313 +5,362 @@ import { useAuth } from './GlobalContext'
 
 export default function Modals() {
 
-  const{selectedValue,ownedBy, setOwnedBy, addedData, setAddedData}= useAuth();
+  const{setIsbuttonopen, selectedValue, setSelectedValue, addedData, setAddedData, token}= useAuth();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setAddedData  ({ ...addedData, [name]: value });
+  
+    if (e.target.type === 'date') {
+      const dateValue = value + 'T00:00:00.000Z';
+      setAddedData({ ...addedData, "AssetType": selectedValue, [name]: dateValue });
+    } else {
+      setAddedData({ ...addedData, "AssetType": selectedValue, [name]: value });
+    }
   };
 
-  if(selectedValue==="Laptop"){
+  const handleSubmitForm=()=>{
+  fetch('https://devassetapi.remotestate.com/asset-management/user/asset/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token, 
+    },
+    body: JSON.stringify(addedData),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log('API response:', data);
+    })
+    .catch((error) => {
+      console.error('Error posting data:', error);
+    });
+
+    setIsbuttonopen(false)
+    setAddedData({})
+    setSelectedValue("None")
+  }
+ 
+  console.log(addedData) 
+
+  if(selectedValue==="laptop"){
     return(
       <div className='lines'>
         <div className='row'>
           <div>
         <div>Owned By</div> 
-        <select  value={ownedBy} onChange={(e)=>setOwnedBy(e.target.value)}  className='modalselect' name="" id="">
-          <option  value="" disabled hidden></option>
+        <select name='ownedBy' value={addedData.ownedBy} onChange={handleInputChange}  className='modalselect'  id="" >
+          <option  value=""  hidden></option>
           <option value="client">Client</option>
-          <option value="RemoteState">RemoteState</option>
+          <option value="remote_state">RemoteState</option>
         </select>
         </div>
-        {ownedBy==="client" &&
+        {addedData.ownedBy==="client" &&
         <div>
         <div>Client Name</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Client Name' />
+          <input name='clientName' className='modalinputfield' type="text" placeholder='Enter Client Name' onChange={handleInputChange} />
         </div>}
         </div>
 
         <div className='row'>
           <div>
           <div>Make</div>
-          <input  className='modalinputfield' type="text" placeholder='Enter Brand Name' />
+          <input name='brand' className='modalinputfield' type="text" placeholder='Enter Brand Name'
+          onChange={handleInputChange} />
           </div>
           <div>
           <div>Model</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Model Number' />
+          <input name='model' className='modalinputfield' type="text" placeholder='Enter Model Number'
+           onChange={handleInputChange}  />
           </div>
         </div>
 
         <div className='row'>
           <div>
           <div>Serial Number</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Serial Number' />
+          <input name='serialNo' className='modalinputfield' type="text" placeholder='Enter Serial Number' 
+          onChange={handleInputChange} />
           </div>
           <div>
           <div>Series</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Series' />
+          <input name='series' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Series' />
           </div>
         </div>
 
         <div className='row'>
           <div>
           <div>Warranty Start Date</div>
-          <input className='modalinputfield' type="date" placeholder='mm/dd/yyyy' />
+          <input name='warrantyStartDate'  className='modalinputfield' type="date" placeholder='mm/dd/yyyy' 
+          onChange={handleInputChange} />
           </div>
           <div>
           <div>Warranty Expiry Date</div>
-          <input className='modalinputfield' type="date" placeholder='mm/dd/yyyy' />
+          <input name='warrantyExpiryDate' className='modalinputfield' type="date" placeholder='mm/dd/yyyy' 
+          onChange={handleInputChange} />
           </div>
         </div>
 
         <div className='row'>
           <div>
           <div>RAM</div>
-          <input className='modalinputfield' type="text" placeholder='Enter RAM' />
+          <input  name='ram' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter RAM' />
           </div>
           <div>
           <div>Processor</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Processor' />
+          <input  name='processor' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Processor' />
           </div>
         </div>
 
         <div className='row'>
           <div>
           <div>Screen Resolution</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Screen Resolution' />
+          <input  name='screenResolution' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Screen Resolution' />
           </div>
           <div>
           <div>Operationg System</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Operationg System' />
+          <input  name='operatingSystem' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Operationg System' />
           </div>
         </div>
 
         <div className='row'>
           <div>
           <div>Date Of Purchase</div>
-          <input className='modalinputfield' type="date" placeholder='dd/mm/yyyy' />
+          <input name='purchasedDate' className='modalinputfield' type="date" placeholder='dd/mm/yyyy' 
+          onChange={handleInputChange} />
           </div>
           <div>
           <div>Charger</div>
-          <div>
-            No <Switch/> Yes
+          <div >
+            No <Switch name='charger' onChange={(e)=>setAddedData({...addedData, [e.target.name] :e.target.checked})}/> Yes
           </div>
           </div>
         </div>
 
         <div className='row'>
-          <button className='end-buttons'>Cancel</button>
-          <button className='end-buttons'>Save</button>
+          <button  onClick={()=>{
+        setIsbuttonopen(false)
+       setSelectedValue("None")}} className='end-buttons'>Cancel</button>
+          <button onClick={handleSubmitForm} className='end-buttons'>Save</button>
           </div>
         </div>
     )
-  } else if(selectedValue==="Mouse"){
+  } else if(selectedValue==="mouse"){
     return(
       <div className='lines'>
         <div className='row'>
           <div>
         <div>Owned By</div> 
-        <select value={ownedBy} onChange={(e)=>setOwnedBy(e.target.value)}  className='modalselect' name="" id="">
-          <option disabled hidden value=""></option>
+        <select name='ownedBy' value={addedData.ownedBy} onChange={handleInputChange}  className='modalselect'  id="" >
+          <option  value=""  hidden></option>
           <option value="client">Client</option>
-          <option value="RemoteState">RemoteState</option>
+          <option value="remote_state">RemoteState</option>
         </select>
         </div>
-        {ownedBy==="client" &&
+        {addedData.ownedBy==="client" &&
         <div>
         <div>Client Name</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Client Name' />
+          <input name='clientName' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Client Name' />
         </div>}
         </div>
 
         <div className='row'>
           <div>
           <div>Make</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Brand Name' />
+          <input name='brand' onChange={handleInputChange}  className='modalinputfield' type="text" placeholder='Enter Brand Name' />
           </div>
           <div>
           <div>Model</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Model Number' />
+          <input name='model' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Model Number' />
           </div>
         </div>
 
         <div className='row'>
           <div>
           <div>Serial Number</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Serial Number' />
+          <input name='serialNo' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Serial Number' />
           </div>
           <div>
           <div>Date Of Purchase</div>
-          <input className='modalinputfield' type="date" placeholder='dd/mm/yyyy' />
+          <input name='purchasedDate' onChange={handleInputChange} className='modalinputfield' type="date" placeholder='dd/mm/yyyy' />
           </div>
         </div>
 
         <div className='row'>
           <div>
           <div>Warranty Start Date</div>
-          <input className='modalinputfield' type="date" placeholder='mm/dd/yyyy' />
+          <input name='warrantyStartDate' onChange={handleInputChange} className='modalinputfield' type="date" placeholder='mm/dd/yyyy' />
           </div>
           <div>
           <div>Warranty Expiry Date</div>
-          <input className='modalinputfield' type="date" placeholder='mm/dd/yyyy' />
+          <input name='warrantyExpiryDate' onChange={handleInputChange} className='modalinputfield' type="date" placeholder='mm/dd/yyyy' />
           </div>
         </div>
 
         <div className='row'>
-          <button className='end-buttons'>Cancel</button>
-          <button className='end-buttons'>Save</button>
+          <button  onClick={()=>{
+        setIsbuttonopen(false)
+       setSelectedValue("None")}} className='end-buttons'>Cancel</button>
+          <button onClick={handleSubmitForm} className='end-buttons'>Save</button>
           </div>
         </div>
 
       
     )
-  } else if(selectedValue==="PenDrive"){
+  } else if(selectedValue==="pen drive"){
     return(
       <div className='lines'>
         <div className='row'>
           <div>
-        <div>Owned By</div> 
-        <select value={ownedBy} onChange={(e)=>setOwnedBy(e.target.value)}  className='modalselect' name="" id="">
-          <option disabled hidden value=""></option>
+          <div>Owned By</div> 
+        <select name='ownedBy' value={addedData.ownedBy} onChange={ handleInputChange}  className='modalselect'  id="" >
+          <option  value=""  hidden></option>
           <option value="client">Client</option>
-          <option value="RemoteState">RemoteState</option>
+          <option value="remote_state">RemoteState</option>
         </select>
         </div>
-        {ownedBy==="client" &&
+        {addedData.ownedBy==="client" &&
         <div>
         <div>Client Name</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Client Name' />
+          <input name='clientName' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Client Name' />
         </div>}
         </div>
 
         <div className='row'>
           <div>
           <div>Make</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Brand Name' />
+          <input name='brand' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Brand Name' />
           </div>
           <div>
           <div>Model</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Model Number' />
+          <input name='model' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Model Number' />
           </div>
         </div>
 
         <div className='row'>
           <div>
           <div>Serial Number</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Serial Number' />
+          <input name='serialNo' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Serial Number' />
           </div>
           <div>
           <div>Storage</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Storage' />
+          <input name='storage' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Storage' />
           </div>
         </div>
 
         <div className='row'>
           <div>
           <div>Warranty Start Date</div>
-          <input className='modalinputfield' type="date" placeholder='mm/dd/yyyy' />
+          <input name='warrantyStartDate' onChange={handleInputChange} className='modalinputfield' type="date" placeholder='mm/dd/yyyy' />
           </div>
           <div>
           <div>Warranty Expiry Date</div>
-          <input className='modalinputfield' type="date" placeholder='mm/dd/yyyy' />
+          <input name='warrantyExpiryDate' onChange={handleInputChange} className='modalinputfield' type="date" placeholder='mm/dd/yyyy' />
           </div>
         </div>
 
         <div className='row'>
         <div>
           <div>Date Of Purchase</div>
-          <input className='modalinputfield' type="date" placeholder='dd/mm/yyyy' />
+          <input name='purchasedDate' onChange={handleInputChange} className='modalinputfield' type="date" placeholder='dd/mm/yyyy' />
           </div>
         </div>
         
         <div className='row'>
-          <button className='end-buttons'>Cancel</button>
-          <button className='end-buttons'>Save</button>
+          <button  onClick={()=>{
+        setIsbuttonopen(false)
+       setSelectedValue("None")}} className='end-buttons'>Cancel</button>
+          <button onClick={handleSubmitForm} className='end-buttons'>Save</button>
           </div>
         </div>
 
       
     )
-  }   else if(selectedValue==="HardDrive"){
+  }   else if(selectedValue==="hard disk"){
     return(
       <div className='lines'>
         <div className='row'>
           <div>
-        <div>Owned By</div> 
-        <select value={ownedBy} onChange={(e)=>setOwnedBy(e.target.value)}  className='modalselect' name="" id="">
-          <option disabled hidden value=""></option>
+          <div>Owned By</div> 
+        <select name='ownedBy' value={addedData.ownedBy} onChange={handleInputChange}  className='modalselect'  id="" >
+          <option  value=""  hidden></option>
           <option value="client">Client</option>
-          <option value="RemoteState">RemoteState</option>
+          <option value="remote_state">RemoteState</option>
         </select>
         </div>
-        {ownedBy==="client" &&
+        {addedData.ownedBy==="client" &&
         <div>
         <div>Client Name</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Client Name' />
+          <input name='clientName' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Client Name' />
         </div>}
         </div>
 
         <div className='row'>
           <div>
           <div>Make</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Brand Name' />
+          <input name='brand' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Brand Name' />
           </div>
           <div>
           <div>Model</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Model Number' />
+          <input name='model' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Model Number' />
           </div>
         </div>
 
         <div className='row'>
           <div>
           <div>Serial Number</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Serial Number' />
+          <input name='serialNo' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Serial Number' />
           </div>
           <div>
           <div>Storage</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Storage' />
+          <input name='storage' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Storage' />
           </div>
         </div>
 
         <div className='row'>
           <div>
           <div>Warranty Start Date</div>
-          <input className='modalinputfield' type="date" placeholder='mm/dd/yyyy' />
+          <input name='warrantyStartDate' onChange={handleInputChange} className='modalinputfield' type="date" placeholder='mm/dd/yyyy' />
           </div>
           <div>
           <div>Warranty Expiry Date</div>
-          <input className='modalinputfield' type="date" placeholder='mm/dd/yyyy' />
+          <input name='warrantyExpiryDate' onChange={handleInputChange} className='modalinputfield' type="date" placeholder='mm/dd/yyyy' />
           </div>
         </div>
 
         <div className='row'>
         <div>
           <div>Date Of Purchase</div>
-          <input className='modalinputfield' type="date" placeholder='dd/mm/yyyy' />
+          <input name='purchasedDate' onChange={handleInputChange} className='modalinputfield' type="date" placeholder='dd/mm/yyyy' />
           </div>
         </div>
         
         <div className='row'>
-          <button className='end-buttons'>Cancel</button>
-          <button className='end-buttons'>Save</button>
+          <button  onClick={()=>{
+        setIsbuttonopen(false)
+       setSelectedValue("None")}} className='end-buttons'>Cancel</button>
+          <button onClick={handleSubmitForm} className='end-buttons'>Save</button>
           </div>
         </div>
 
       
     )
-  }  else if(selectedValue==="Mobile"){
+  }  else if(selectedValue==="mobile"){
     return(
       <div className='lines'>
         <div className='row'>
           <div>
-        <div>Owned By</div> 
-        <select value={ownedBy} onChange={(e)=>setOwnedBy(e.target.value)}  className='modalselect' name="" id="">
-          <option disabled hidden value=""></option>
+          <div>Owned By</div> 
+        <select name='ownedBy' value={addedData.ownedBy} onChange={ handleInputChange}  className='modalselect'  id="" >
+          <option  value=""  hidden></option>
           <option value="client">Client</option>
-          <option value="RemoteState">RemoteState</option>
+          <option value="remote_state">RemoteState</option>
         </select>
         </div>
-        {ownedBy==="client" &&
+        {addedData.ownedBy==="client" &&
         <div>
         <div>Client Name</div>
           <input className='modalinputfield' type="text" placeholder='Enter Client Name' />
@@ -321,22 +370,22 @@ export default function Modals() {
         <div className='row'>
           <div>
           <div>Make</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Brand Name' />
+          <input name='brand' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Brand Name' />
           </div>
           <div>
           <div>Model</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Model Number' />
+          <input name='model' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Model Number' />
           </div>
         </div>
 
         <div className='row'>
           <div>
           <div>RAM</div>
-          <input className='modalinputfield' type="text" placeholder='Enter RAM' />
+          <input name='ram' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter RAM' />
           </div>
           <div>
           <div>OS type</div>
-          <select className='modalselect'  name="" id="">
+          <select name='osType' onChange={handleInputChange} className='modalselect'  id="">
             <option value="Android">Android</option>
             <option value="iOS">iOS</option>
           </select>
@@ -346,11 +395,11 @@ export default function Modals() {
         <div className='row'>
           <div>
           <div>IMEI Number-1</div>
-          <input className='modalinputfield' type="text" placeholder='Enter IMEI Number' />
+          <input name='imeiNumber1' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter IMEI Number' />
           </div>
           <div>
           <div>IMEI Number-2</div>
-          <input className='modalinputfield' type="text" placeholder='Enter IMEI Number' />
+          <input name='imeiNumber2' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter IMEI Number' />
           </div>
         </div>
 
@@ -358,75 +407,81 @@ export default function Modals() {
         <div className='row'>
           <div>
           <div>Date Of Purchase</div>
-          <input className='modalinputfield' type="date" placeholder='dd/mm/yyyy' />
+          <input name='purchasedDate' onChange={handleInputChange} className='modalinputfield' type="date" placeholder='dd/mm/yyyy' />
           </div>
           <div>
           <div>Serial Number</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Serial Number' />
+          <input name='serialNo' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Serial Number' />
           </div>
         </div>
 
         <div className='row'>
           <div>
           <div>Warranty Start Date</div>
-          <input className='modalinputfield' type="date" placeholder='mm/dd/yyyy' />
+          <input name='warrantyStartDate' onChange={handleInputChange} className='modalinputfield' type="date" placeholder='mm/dd/yyyy' />
           </div>
           <div>
           <div>Warranty Expiry Date</div>
-          <input className='modalinputfield' type="date" placeholder='mm/dd/yyyy' />
+          <input name='warrantyExpiryDate' onChange={handleInputChange} className='modalinputfield' type="date" placeholder='mm/dd/yyyy' />
           </div>
         </div>
 
         <div className='row'>
-          <button className='end-buttons'>Cancel</button>
-          <button className='end-buttons'>Save</button>
+          <button  onClick={()=>{
+        setIsbuttonopen(false)
+       setSelectedValue("None")}} className='end-buttons'>Cancel</button>
+          <button onClick={handleSubmitForm} className='end-buttons'>Save</button>
           </div>
         </div>
     )
-  }  else if(selectedValue==="SIMCard"){
+  }  else if(selectedValue==="sim"){
     return(
       <div className='lines'>
         <div className='row'>
           <div>
-        <div>Owned By</div> 
-        <select value={ownedBy} onChange={(e)=>setOwnedBy(e.target.value)}  className='modalselect' name="" id="">
-          <option disabled hidden value=""></option>
+          <div>Owned By</div> 
+        <select name='ownedBy' value={addedData.ownedBy} onChange={handleInputChange}  className='modalselect'  id="" >
+          <option  value=""  hidden></option>
           <option value="client">Client</option>
-          <option value="RemoteState">RemoteState</option>
+          <option value="remote_state">RemoteState</option>
         </select>
         </div>
-        {ownedBy==="client" &&
+        {addedData.ownedBy==="client" &&
         <div>
         <div>Client Name</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Client Name' />
+          <input name='clientName' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Client Name' />
         </div>}
         </div>
 
         <div className='row'>
           <div>
           <div>Make</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Brand Name' />
+          <input name='brand' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Brand Name' />
           </div>
           <div>
-          <div>Model</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Model Number' />
+          <div>SIM Card Number</div>
+          <input name='simNo' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter SIM Card Number' />
           </div>
         </div>
 
+        
+
         <div className='row'>
           <div>
-          <div>MObile Number</div>
-          <input className='modalinputfield' type="text" placeholder='Enter Mobile Number' />
+          <div>Mobile Number</div>
+          <input name='phoneNo' onChange={handleInputChange} className='modalinputfield' type="text" placeholder='Enter Mobile Number' />
           </div>
           <div>
           <div>Date Of Purchase</div>
-          <input className='modalinputfield' type="date" placeholder='dd/mm/yyyy' />
+          <input name='purchasedDate' onChange={handleInputChange} className='modalinputfield' type="date" placeholder='dd/mm/yyyy' />
           </div>
         </div>
 
         <div className='row'>
-          <button className='end-buttons'>Cancel</button>
-          <button className='end-buttons'>Save</button>
+          <button  onClick={()=>{
+        setIsbuttonopen(false)
+       setSelectedValue("None")}} className='end-buttons'>Cancel</button>
+          <button onClick={handleSubmitForm} className='end-buttons'>Save</button>
           </div>
         </div>
     )

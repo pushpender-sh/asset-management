@@ -50,7 +50,7 @@ function DataEntries({assetDetails }) {
   );
 }
 
-const HandleAddAssets=({setIsbuttonopen, selectedValue, setSelectedValue})=>{
+const HandleAddAssets=({setIsbuttonopen, selectedValue, setSelectedValue, addedData, setAddedData})=>{
 
   
 
@@ -65,14 +65,14 @@ const HandleAddAssets=({setIsbuttonopen, selectedValue, setSelectedValue})=>{
 
       <div className='assignasset'>
          <div style={{color:"#6200EE", fontSize:"20px", fontWeight:"bolder"}}>Assign Asset </div>
-        <select value={selectedValue} onChange={(e)=>setSelectedValue(e.target.value)} className='assignasset-select' name="" id="" >
+        <select value={selectedValue} onChange={(e)=>{setSelectedValue(e.target.value) }} className='assignasset-select' name="" id="" >
               <option value="All">None</option>
-              <option value="Laptop">Laptop</option>
-              <option value="Mouse">Mouse</option>
-              <option value="PenDrive">Pen Drive</option>
-              <option value="HardDrive">Hard Drive</option>
-              <option value="Mobile">Mobile</option>
-              <option value="SIMCard">SIM Card</option>
+              <option value="laptop">Laptop</option>
+              <option value="mouse">Mouse</option>
+              <option value="pen drive">Pen Drive</option>
+              <option value="hard disk">Hard Disk</option>
+              <option value="mobile">Mobile</option>
+              <option value="sim">SIM Card</option>
         </select>
      {/* {console.log(selectedValue)} */}
          
@@ -84,7 +84,7 @@ const HandleAddAssets=({setIsbuttonopen, selectedValue, setSelectedValue})=>{
   )
 }
 
-function DataTable({assetDetails, input, setInput, checked, setChecked, isbuttonopen, setIsbuttonopen}){
+function DataTable({assetDetails, input, setInput, checked, setChecked, isbuttonopen, setIsbuttonopen,addedData, setAddedData}){
 
   const handleButtonClick = () => {
     if (isbuttonopen) {
@@ -144,7 +144,7 @@ function DataTable({assetDetails, input, setInput, checked, setChecked, isbutton
         </div>
 
          <div>
-          <DataEntries assetDetails={assetDetails} input={input} checked={checked}  />
+          <DataEntries assetDetails={assetDetails} input={input} checked={checked}  addedData={addedData} setAddedData={setAddedData}  />
           
          </div>
 
@@ -154,7 +154,8 @@ function DataTable({assetDetails, input, setInput, checked, setChecked, isbutton
 
 export default function AssetLists() {
     
-    const { input, setInput, checked, setChecked, isbuttonopen, setIsbuttonopen, assetDetails, selectedValue, setSelectedValue} = useAuth();
+    const { input, setInput, checked, setChecked, isbuttonopen, setIsbuttonopen, assetDetails,
+       selectedValue, setSelectedValue, addedData, setAddedData} = useAuth();
     // console.log(assetDetails);
     if(!assetDetails){
       return(
@@ -169,7 +170,8 @@ export default function AssetLists() {
     <Navbar/>
     <div style={{paddingTop:'1px'}}>
         <DataTable input={input} setInput={setInput} checked={checked} setChecked={setChecked} isbuttonopen={isbuttonopen} setIsbuttonopen={setIsbuttonopen} assetDetails={assetDetails} />
-         <div className='addassetPopup'>{isbuttonopen && <HandleAddAssets setIsbuttonopen={setIsbuttonopen} selectedValue={selectedValue} setSelectedValue={setSelectedValue}/>} </div>
+         <div className='addassetPopup'>{isbuttonopen && <HandleAddAssets setIsbuttonopen={setIsbuttonopen} selectedValue={selectedValue} setSelectedValue={setSelectedValue}
+          addedData={addedData} setAddedData={setAddedData}  />} </div>
     </div>
     </div>
   )

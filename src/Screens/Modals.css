@@ -18,20 +18,24 @@
 .modalinputfield{
         height: 20px;
         width: 150px;
-        /* background-color: #1e0a4d; */
+        background-color: #ECEAF4;
         border-radius: 5px;
         padding: 10px;
     }
 
 .modalselect{
     height: 40px;
-    width: 150px;
-    /* background-color: #1e0a4d; */
+    width: 170px;
+    background-color: #ECEAF4;
     border-radius: 5px;
     padding: 10px;
+    margin-top: 0.5rem;
 }
 
 .end-buttons{
    display: flex;
    justify-content: center;
+}
+.end-buttons:hover{
+    cursor: pointer;
 }

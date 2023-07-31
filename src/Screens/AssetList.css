@@ -149,6 +149,7 @@ option{
     padding: 10px;
     padding-bottom: 3rem;   
     margin-bottom: 2rem;
+    /* margin-top: 5rem; */
     border-radius: 5px;
 
     background-color: white;  
@@ -187,4 +188,5 @@ option{
     justify-content: center;
     align-items: center;
     margin-top: -700px; 
+    /* position: fixed; */
 }

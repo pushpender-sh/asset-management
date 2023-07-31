@@ -58,7 +58,7 @@ const HandleAddAssets=({setIsbuttonopen, selectedValue, setSelectedValue})=>{
     <div className='addnewasset'>
       <div className='addassetheader'>
       <div style={{fontWeight:"bold"}}>Asset Details</div>
-      <img src={cross} alt="" onClick={()=>setIsbuttonopen(false)}/>
+      <img className='cross' src={cross} alt="" onClick={()=>setIsbuttonopen(false)}/>
       </div>
 
       <div className='assignasset'>

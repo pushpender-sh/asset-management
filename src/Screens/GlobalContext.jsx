@@ -15,6 +15,7 @@ export const AuthProvider=({children})=>{
     const[ownedBy, setOwnedBy]= useState('');
 
     const[addedData, setAddedData]= useState({});
+    const[actionButton, setActionButton]= useState(false);
 
 
     const navigate = useNavigate('')
@@ -106,7 +107,7 @@ export const AuthProvider=({children})=>{
         <AuthContext.Provider value={{token, setToken, assetvalue, navigate,
                               assetDetails,input, setInput, checked,setChecked,
                               isbuttonopen, setIsbuttonopen, selectedValue, setSelectedValue,
-                              ownedBy, setOwnedBy, addedData, setAddedData }}>
+                              ownedBy, setOwnedBy, addedData, setAddedData,actionButton, setActionButton }}>
             {children}
         </AuthContext.Provider>
     );

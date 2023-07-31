@@ -10,7 +10,16 @@ import CircularProgress from '@mui/material/CircularProgress';
 import ToggleButton from '@mui/material/ToggleButton';
 
 
-function DataEntries({assetDetails }) {
+function DataEntries({assetDetails,actionButton, setActionButton }) {
+
+  function handleActionButton(){
+    return(
+      <div>
+        <div>Edit Asset</div>
+        <div>Delete Asset</div>
+      </div>
+    )
+  }
 
     // console.log(filteredAssets)
   return (
@@ -41,7 +50,14 @@ function DataEntries({assetDetails }) {
             <td>{value.warrantyExpiryDate}</td>
             <td>{value.assignedTo}</td>
             <td>{value.status}</td>
-            <td><ToggleButton style={{height:"40px", width:"40px", fontWeight:"bolder"}}>...</ToggleButton></td>
+            <td><ToggleButton style={{height:"40px", width:"40px", fontWeight:"bolder"}  } onClick={
+              ()=>{ 
+              if(actionButton===false) {setActionButton(true)}
+            else{setActionButton(false)}}}
+            
+            >... </ToggleButton>
+            {actionButton && handleActionButton()}
+            </td>
           </tr>
 
         ))}
@@ -51,9 +67,7 @@ function DataEntries({assetDetails }) {
   );
 }
 
-const HandleAddAssets=({setIsbuttonopen, selectedValue, setSelectedValue, addedData, setAddedData})=>{
-
-  
+const HandleAddAssets=({setIsbuttonopen, selectedValue, setSelectedValue})=>{
 
   return(
     <div className='addnewasset'>
@@ -82,7 +96,7 @@ const HandleAddAssets=({setIsbuttonopen, selectedValue, setSelectedValue, addedD
   )
 }
 
-function DataTable({assetDetails, input, setInput, checked, setChecked, isbuttonopen, setIsbuttonopen,addedData, setAddedData}){
+function DataTable({assetDetails, input, setInput, checked, setChecked, isbuttonopen, setIsbuttonopen, actionButton, setActionButton}){
 
   const handleButtonClick = () => {
     if (isbuttonopen) {
@@ -138,7 +152,7 @@ function DataTable({assetDetails, input, setInput, checked, setChecked, isbutton
         </div>
 
          <div>
-          <DataEntries assetDetails={assetDetails} input={input} checked={checked}  addedData={addedData} setAddedData={setAddedData}  />
+          <DataEntries assetDetails={assetDetails} input={input} checked={checked} actionButton={actionButton} setActionButton={setActionButton}  />
           
          </div>
 
@@ -149,7 +163,7 @@ function DataTable({assetDetails, input, setInput, checked, setChecked, isbutton
 export default function AssetLists() {
     
     const { input, setInput, checked, setChecked, isbuttonopen, setIsbuttonopen, assetDetails,
-       selectedValue, setSelectedValue, addedData, setAddedData} = useAuth();
+       selectedValue, setSelectedValue,  actionButton, setActionButton} = useAuth();
     // console.log(assetDetails);
     if(!assetDetails){
       return(
@@ -163,9 +177,11 @@ export default function AssetLists() {
     <div>  
     <Navbar/>
     <div style={{paddingTop:'1px'}}>
-        <DataTable input={input} setInput={setInput} checked={checked} setChecked={setChecked} isbuttonopen={isbuttonopen} setIsbuttonopen={setIsbuttonopen} assetDetails={assetDetails} />
-         <div className='addassetPopup'>{isbuttonopen && <HandleAddAssets setIsbuttonopen={setIsbuttonopen} selectedValue={selectedValue} setSelectedValue={setSelectedValue}
-          addedData={addedData} setAddedData={setAddedData}  />} </div>
+
+        <DataTable input={input} setInput={setInput} checked={checked} setChecked={setChecked} isbuttonopen={isbuttonopen} setIsbuttonopen={setIsbuttonopen}
+         assetDetails={assetDetails}  actionButton={actionButton} setActionButton={setActionButton} />
+
+         <div className='addassetPopup'>{isbuttonopen && <HandleAddAssets setIsbuttonopen={setIsbuttonopen} selectedValue={selectedValue} setSelectedValue={setSelectedValue} />} </div>
     </div>
     </div>
   )

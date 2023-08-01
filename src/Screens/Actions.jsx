@@ -10,7 +10,7 @@ export  function Delete() {
   function deleteAssetDisplay(){
     return(
         <div className='assetDelete' onClick={handleDeleteAsset}>
-           <div style={{display:"flex", gap:"15rem", fontSize:"20px", fontWeight:"bolder"}}> <div>Deletion Reason</div>
+           <div style={{display:"flex", gap:"10rem", fontSize:"20px", fontWeight:"bolder"}}> <div>Deletion Reason</div>
            <img src={cross} alt="" onClick={()=>{
             setDeletePopup(false) 
              setActionButton(false) } } />

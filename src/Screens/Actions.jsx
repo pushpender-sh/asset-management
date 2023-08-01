@@ -4,13 +4,13 @@ import { useAuth } from './GlobalContext'
 import cross from '../Images/cross.png'
 
 export  function Delete() {
-    const {selectedRowKey, token, selectedValue, deletePopup, setDeletePopup,setActionButton} = useAuth();
+    const {selectedRowKey, token, selectedValue,setSelectedValue, deletePopup, setDeletePopup,setActionButton} = useAuth();
     
 
   function deleteAssetDisplay(){
     return(
         <div className='assetDelete' onClick={handleDeleteAsset}>
-           <div style={{display:"flex", gap:"15rem"}}> <div>Deletion Reason</div>
+           <div style={{display:"flex", gap:"15rem", fontSize:"20px", fontWeight:"bolder"}}> <div>Deletion Reason</div>
            <img src={cross} alt="" onClick={()=>{
             setDeletePopup(false) 
              setActionButton(false) } } />
@@ -18,7 +18,8 @@ export  function Delete() {
            <input type="text" style={{height:"30px", width:"300px", padding:"10px"}} />
            <button style={{justifyContent:"center"}} onClick={()=>{
             setDeletePopup(false)
-            setActionButton(false)}}>Confirm</button>
+            setActionButton(false)
+            setSelectedValue("None")}}>Confirm</button>
         </div>
     )
   }

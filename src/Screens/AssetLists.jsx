@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './AssetList.css'
 import { useAuth } from '../Screens/GlobalContext'
 import Modals from './Modals'
@@ -11,16 +11,19 @@ import ToggleButton from '@mui/material/ToggleButton';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+import { Delete } from './Actions'
 
-function DataEntries({assetDetails,actionButton, setActionButton }) {
 
-  const[selectedRowKey, setSelectedRowKey]=useState(null);
+function DataEntries({assetDetails,actionButton, setActionButton,selectedRowKey, setSelectedRowKey }) {
+
+  const{ deletePopup,setDeletePopup,setSelectedValue} =useAuth()
 
   function handleActionButton(){
     return(
       <div className='handleactionButton'>
-        <div className='edit action'> <EditIcon/> <div> Edit Asset </div></div>
-        <div className='delete action'> <DeleteIcon/> <div> Delete Asset </div></div>
+        <div className='edit action' > <EditIcon/> <div> Edit Asset </div></div>
+        <div className='delete action' onClick={()=>{if(deletePopup===false) setDeletePopup(true)
+        else setDeletePopup(false)}}> <DeleteIcon/> <div> Delete Asset </div></div>
       </div>
     )
   }
@@ -61,7 +64,8 @@ function DataEntries({assetDetails,actionButton, setActionButton }) {
                 ()=>{ 
                   if(actionButton===true && selectedRowKey===value.id ) {setActionButton(false)}
                   else{setActionButton(true)}  
-                  setSelectedRowKey(value.id)}}     
+                  setSelectedRowKey(value.id)
+                  setSelectedValue(value.AssetType)}}    
                   >... </ToggleButton>
             {actionButton && selectedRowKey === value.id && handleActionButton()}
             </td>
@@ -103,7 +107,8 @@ const HandleAddAssets=({setIsbuttonopen, selectedValue, setSelectedValue})=>{
   )
 }
 
-function DataTable({assetDetails, input, setInput, checked, setChecked, isbuttonopen, setIsbuttonopen, actionButton, setActionButton}){
+function DataTable({assetDetails, input, setInput, checked, setChecked, isbuttonopen, setIsbuttonopen, 
+  actionButton, setActionButton, selectedRowKey, setSelectedRowKey}){
 
   const handleButtonClick = () => {
     if (isbuttonopen) {
@@ -159,7 +164,8 @@ function DataTable({assetDetails, input, setInput, checked, setChecked, isbutton
         </div>
 
          <div>
-          <DataEntries assetDetails={assetDetails} input={input} checked={checked} actionButton={actionButton} setActionButton={setActionButton}  />
+          <DataEntries assetDetails={assetDetails} input={input} checked={checked} actionButton={actionButton} setActionButton={setActionButton}
+          selectedRowKey={selectedRowKey} setSelectedRowKey={setSelectedRowKey}  />
           
          </div>
 
@@ -170,7 +176,8 @@ function DataTable({assetDetails, input, setInput, checked, setChecked, isbutton
 export default function AssetLists() {
     
     const { input, setInput, checked, setChecked, isbuttonopen, setIsbuttonopen, assetDetails,
-       selectedValue, setSelectedValue,  actionButton, setActionButton} = useAuth();
+       selectedValue, setSelectedValue,  actionButton, setActionButton, selectedRowKey, setSelectedRowKey,
+       deletePopup} = useAuth();
     // console.log(assetDetails);
     if(!assetDetails){
       return(
@@ -184,12 +191,12 @@ export default function AssetLists() {
     <div>  
     <Navbar/>
     <div style={{paddingTop:'1px'}}>
-
         <DataTable input={input} setInput={setInput} checked={checked} setChecked={setChecked} isbuttonopen={isbuttonopen} setIsbuttonopen={setIsbuttonopen}
-         assetDetails={assetDetails}  actionButton={actionButton} setActionButton={setActionButton} />
+         assetDetails={assetDetails}  actionButton={actionButton} setActionButton={setActionButton} selectedRowKey={selectedRowKey} setSelectedRowKey={setSelectedRowKey} />
 
          <div className='addassetPopup'>{isbuttonopen && <HandleAddAssets setIsbuttonopen={setIsbuttonopen} selectedValue={selectedValue} setSelectedValue={setSelectedValue} />} </div>
     </div>
+         <div> {deletePopup && <Delete/>}</div>
     </div>
   )
 }

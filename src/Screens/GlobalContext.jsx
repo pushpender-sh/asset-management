@@ -17,6 +17,9 @@ export const AuthProvider=({children})=>{
     const[addedData, setAddedData]= useState({});
     const[actionButton, setActionButton]= useState(false);
 
+    const[selectedRowKey, setSelectedRowKey]=useState(null);
+    const [deletePopup, setDeletePopup]= useState(false)
+
 
     const navigate = useNavigate('')
 
@@ -98,7 +101,7 @@ export const AuthProvider=({children})=>{
         };
     
         // fetchData();
-      }, [token, input, checked ]);
+      }, [token, input, checked,deletePopup ]);
 
 
 
@@ -108,7 +111,7 @@ export const AuthProvider=({children})=>{
                               assetDetails,input, setInput, checked,setChecked,
                               isbuttonopen, setIsbuttonopen, selectedValue, setSelectedValue,
                               ownedBy, setOwnedBy, addedData, setAddedData,actionButton, setActionButton,
-                             }}>
+                              selectedRowKey, setSelectedRowKey,deletePopup, setDeletePopup }}>
             {children}
         </AuthContext.Provider>
     );

@@ -210,12 +210,11 @@ option{
 }
 .action{
     display: flex;
-    justify-content: left;
 }
 
 .action:hover{
     cursor: pointer;
-    background-color: #bdb0b0;
+    background-color: #eee7e7;
 }
 .delete{
     color: red;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './AssetList.css'
 import { useAuth } from '../Screens/GlobalContext'
 import Modals from './Modals'
@@ -8,15 +8,19 @@ import cross from '../Images/cross.png'
 import plus from '../Images/plus.png'
 import CircularProgress from '@mui/material/CircularProgress';
 import ToggleButton from '@mui/material/ToggleButton';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 function DataEntries({assetDetails,actionButton, setActionButton }) {
 
+  const[selectedRowKey, setSelectedRowKey]=useState(null);
+
   function handleActionButton(){
     return(
-      <div>
-        <div>Edit Asset</div>
-        <div>Delete Asset</div>
+      <div className='handleactionButton'>
+        <div className='edit action'> <EditIcon/> <div> Edit Asset </div></div>
+        <div className='delete action'> <DeleteIcon/> <div> Delete Asset </div></div>
       </div>
     )
   }
@@ -50,13 +54,16 @@ function DataEntries({assetDetails,actionButton, setActionButton }) {
             <td>{value.warrantyExpiryDate}</td>
             <td>{value.assignedTo}</td>
             <td>{value.status}</td>
-            <td><ToggleButton style={{height:"40px", width:"40px", fontWeight:"bolder"}  } onClick={
-              ()=>{ 
-              if(actionButton===false) {setActionButton(true)}
-            else{setActionButton(false)}}}
-            
-            >... </ToggleButton>
-            {actionButton && handleActionButton()}
+            <td style={{display:"flex"}}>
+              <ToggleButton 
+              sx={{height:"40px", width:"40px"}}
+              onClick={
+                ()=>{ 
+                  if(actionButton===true && selectedRowKey===value.id ) {setActionButton(false)}
+                  else{setActionButton(true)}  
+                  setSelectedRowKey(value.id)}}     
+                  >... </ToggleButton>
+            {actionButton && selectedRowKey === value.id && handleActionButton()}
             </td>
           </tr>
 

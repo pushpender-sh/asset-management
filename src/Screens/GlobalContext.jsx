@@ -107,7 +107,8 @@ export const AuthProvider=({children})=>{
         <AuthContext.Provider value={{token, setToken, assetvalue, navigate,
                               assetDetails,input, setInput, checked,setChecked,
                               isbuttonopen, setIsbuttonopen, selectedValue, setSelectedValue,
-                              ownedBy, setOwnedBy, addedData, setAddedData,actionButton, setActionButton }}>
+                              ownedBy, setOwnedBy, addedData, setAddedData,actionButton, setActionButton,
+                             }}>
             {children}
         </AuthContext.Provider>
     );

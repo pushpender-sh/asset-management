@@ -1,10 +1,10 @@
-import { Route, Routes , useLocation} from 'react-router-dom';
+import { Route, Routes, useLocation} from 'react-router-dom';
 import './App.css';
 import Login from './Screens/Login';
 import DashBoard from './Screens/DashBoard';
 import { AuthProvider } from './Screens/GlobalContext';
 import AssetLists from './Screens/AssetLists';
-import Navbar from './Screens/Navbar';
+// import Navbar from './Screens/Navbar';
 
 function App() {
 

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 const AuthContext= createContext();
 
 export const AuthProvider=({children})=>{
-    const[token, setToken]= useState('');
+    const[token, setToken]= useState(localStorage.getItem('token') || '');
     const[assetvalue, setAssetvalue]=useState();
     const[assetDetails, setAssetDetails]=useState();
     const [input, setInput]= useState('')
@@ -35,11 +35,11 @@ export const AuthProvider=({children})=>{
         }
       }, []);
 
-    //   useEffect(() => {
-    //   if(!token){
-    //     navigate('/')
-    //  }
-    // }, []);
+      useEffect(() => {
+      if(!token){
+        navigate('/')
+     }
+    }, []);
 
 
       useEffect(() => {

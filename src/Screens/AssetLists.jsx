@@ -12,6 +12,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { Delete,Edit } from './Actions'
+import Forms from './Forms'
 
 
 
@@ -113,7 +114,8 @@ const HandleAddAssets=({setIsbuttonopen, selectedValue, setSelectedValue, setAct
               <option value="sim">SIM Card</option>
         </select>
      {/* {console.log(selectedValue)} */}
-       <Modals/>     
+       {/* <Modals/>      */}
+       <Forms/>
       </div>
     </div>
   )
@@ -196,7 +198,7 @@ export default function AssetLists() {
 
        if(!token){
         navigate('/')
-        return null
+        // return null
      }
      
      

@@ -18,12 +18,14 @@ export const AuthProvider=({children})=>{
     const[actionButton, setActionButton]= useState(false);
 
     const[selectedRowKey, setSelectedRowKey]=useState(null);
-    const [deletePopup, setDeletePopup]= useState(false)
+    const [deletePopup, setDeletePopup]= useState(false);
+
+    const[editData, setEditData] =useState();
 
 
     const navigate = useNavigate('')
 
-
+    
 
     useEffect(() => {
         // Check if a token is already stored (e.g., in local storage)
@@ -32,6 +34,12 @@ export const AuthProvider=({children})=>{
           setToken(storedToken);
         }
       }, []);
+
+    //   useEffect(() => {
+    //   if(!token){
+    //     navigate('/')
+    //  }
+    // }, []);
 
 
       useEffect(() => {
@@ -111,7 +119,7 @@ export const AuthProvider=({children})=>{
                               assetDetails,input, setInput, checked,setChecked,
                               isbuttonopen, setIsbuttonopen, selectedValue, setSelectedValue,
                               ownedBy, setOwnedBy, addedData, setAddedData,actionButton, setActionButton,
-                              selectedRowKey, setSelectedRowKey,deletePopup, setDeletePopup }}>
+                              selectedRowKey, setSelectedRowKey,deletePopup, setDeletePopup,editData, setEditData}}>
             {children}
         </AuthContext.Provider>
     );

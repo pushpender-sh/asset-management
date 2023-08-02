@@ -54,7 +54,14 @@ function Card({ assetImage ,assetName, assetCount}){
 }
 
 export default function Dashboard() {
-  const {assetvalue } = useAuth();
+
+  const {assetvalue, token, navigate } = useAuth();
+
+  if(!token){
+    navigate('/')
+    return null
+ }
+
   if(!assetvalue){
     return(
         <div> <CircularProgress/> <br />

@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Modals.css'
 import Switch from '@mui/material/Switch';
 import { useAuth } from './GlobalContext'
 
 export default function Modals() {
 
-  const{setIsbuttonopen, selectedValue, setSelectedValue, addedData, setAddedData, token}= useAuth();
+  const{isbuttonopen, setIsbuttonopen, selectedValue, setSelectedValue, addedData, setAddedData, token, editData,  selectedRowKey}= useAuth();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -45,7 +45,40 @@ export default function Modals() {
     setSelectedValue("None")
   }
  
-  console.log(addedData) 
+  // console.log(addedData) 
+
+
+  const handleUpdateForm=()=>{
+
+    useEffect=(()=>{
+    fetch('https://devassetapi.remotestate.com/asset-management/user/asset/', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token, 
+      },
+      body: JSON.stringify({...addedData,"id":selectedRowKey}),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('API response:', data);
+      })
+      .catch((error) => {
+        console.error('Error posting data:', error);
+      });
+      
+  },[isbuttonopen]);
+  
+    setIsbuttonopen(false)
+    setAddedData({})
+    setSelectedValue("None")
+  }
+
 
   if(selectedValue==="laptop"){
     return(
@@ -144,7 +177,7 @@ export default function Modals() {
           <button  onClick={()=>{
         setIsbuttonopen(false)
        setSelectedValue("None")}} className='end-buttons'>Cancel</button>
-          <button onClick={handleSubmitForm} className='end-buttons'>Save</button>
+          <button onClick={editData?handleUpdateForm: handleSubmitForm} className='end-buttons'>{editData?"Update": "Save"}</button>
           </div>
         </div>
     )
@@ -204,7 +237,7 @@ export default function Modals() {
           <button  onClick={()=>{
         setIsbuttonopen(false)
        setSelectedValue("None")}} className='end-buttons'>Cancel</button>
-          <button onClick={handleSubmitForm} className='end-buttons'>Save</button>
+          <button onClick={editData?handleUpdateForm: handleSubmitForm} className='end-buttons'>{editData?"Update": "Save"}</button>
           </div>
         </div>
 
@@ -273,7 +306,7 @@ export default function Modals() {
           <button  onClick={()=>{
         setIsbuttonopen(false)
        setSelectedValue("None")}} className='end-buttons'>Cancel</button>
-          <button onClick={handleSubmitForm} className='end-buttons'>Save</button>
+          <button onClick={editData?handleUpdateForm: handleSubmitForm} className='end-buttons'>{editData?"Update": "Save"}</button>
           </div>
         </div>
 
@@ -342,7 +375,7 @@ export default function Modals() {
           <button  onClick={()=>{
         setIsbuttonopen(false)
        setSelectedValue("None")}} className='end-buttons'>Cancel</button>
-          <button onClick={handleSubmitForm} className='end-buttons'>Save</button>
+          <button onClick={editData?handleUpdateForm: handleSubmitForm} className='end-buttons'>{editData?"Update": "Save"}</button>
           </div>
         </div>
 
@@ -430,7 +463,7 @@ export default function Modals() {
           <button  onClick={()=>{
         setIsbuttonopen(false)
        setSelectedValue("None")}} className='end-buttons'>Cancel</button>
-          <button onClick={handleSubmitForm} className='end-buttons'>Save</button>
+         <button onClick={editData?handleUpdateForm: handleSubmitForm} className='end-buttons'>{editData?"Update": "Save"}</button>
           </div>
         </div>
     )
@@ -481,7 +514,7 @@ export default function Modals() {
           <button  onClick={()=>{
         setIsbuttonopen(false)
        setSelectedValue("None")}} className='end-buttons'>Cancel</button>
-          <button onClick={handleSubmitForm} className='end-buttons'>Save</button>
+          <button onClick={editData?handleUpdateForm: handleSubmitForm} className='end-buttons'>{editData?"Update": "Save"}</button>
           </div>
         </div>
     )

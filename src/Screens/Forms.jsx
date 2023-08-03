@@ -26,7 +26,6 @@ export default function Forms() {
            }
 
            if(editData){
-           
               fetch('https://devassetapi.remotestate.com/asset-management/user/asset/', {
                 method: 'PUT',
                 headers: {

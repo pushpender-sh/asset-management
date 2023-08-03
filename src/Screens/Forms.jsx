@@ -16,7 +16,6 @@ export default function Forms() {
     const handleOwnedByChange = (e) => {
       setOwnedByValue(e.target.value);
     }
-    
     const handleSubmitForm=(data)=>{
            const finalData={
             ...data, "AssetType": selectedValue,

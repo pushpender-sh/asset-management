@@ -1,7 +1,8 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import { useForm } from 'react-hook-form';
 import { useAuth } from './GlobalContext'
 import Switch from '@mui/material/Switch';
+import './Forms.css'
 
 
 
@@ -24,7 +25,37 @@ export default function Forms() {
            warrantyExpiryDate: data.warrantyExpiryDate?data.warrantyExpiryDate+'T00:00:00.000Z': null
            }
 
-        fetch('https://devassetapi.remotestate.com/asset-management/user/asset/', {
+           if(editData){
+           
+              fetch('https://devassetapi.remotestate.com/asset-management/user/asset/', {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': token, 
+                },
+                body: JSON.stringify({...finalData,"id":selectedRowKey}),
+              })
+                .then((response) => {
+                  if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                  }
+                  return response.json();
+                })
+                .then((data) => {
+                  console.log('API response:', data);
+                })
+                .catch((error) => {
+                  console.error('Error posting data:', error);
+                });
+            
+              setIsbuttonopen(false)
+              setAddedData({})
+              setSelectedValue("None")
+           }
+           else{
+
+             
+             fetch('https://devassetapi.remotestate.com/asset-management/user/asset/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -32,26 +63,26 @@ export default function Forms() {
           },
           body: JSON.stringify(finalData),
         })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            return response.json();
-          })
-          .then((data) => {
-            console.log('API response:', data);
-          })
-          .catch((error) => {
-            console.error('Error posting data:', error);
-          });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log('API response:', data);
+        })
+        .catch((error) => {
+          console.error('Error posting data:', error);
+        });
+        
+        setIsbuttonopen(false)
+        setAddedData({})
+        setSelectedValue("None")
+      }
       
-          setIsbuttonopen(false)
-          setAddedData({})
-          setSelectedValue("None")
-        }
-
-
-
+       
+    }
     if(selectedValue==="laptop"){
         return(
           <form onSubmit={handleSubmit(handleSubmitForm)} className='lines'>

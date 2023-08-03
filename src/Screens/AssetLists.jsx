@@ -21,14 +21,41 @@ function DataEntries({assetDetails,actionButton, setActionButton,selectedRowKey,
   const{token, deletePopup,setDeletePopup,selectedValue, setSelectedValue, setIsbuttonopen,editdata, setEditData, addedData} =useAuth()
 
   function handleActionButton(){
-    const handleEditAction=()=>{
-      Edit({selectedRowKey, token, selectedValue,editdata, setEditData, addedData, setIsbuttonopen});
-      setIsbuttonopen(true)
-    }
+    async function fetchData() {
+      try {
+          var params = {
+              assetId: selectedRowKey,
+              assetType: selectedValue,
+          }
+          const res = await fetch(`https://devassetapi.remotestate.com/asset-management/user/asset/specifications?${new URLSearchParams(params).toString()}`,
+              {
+                  method: 'GET',
+                  headers: {
+                      'Authorization': token,
+                      'Content-Type': 'application/json'
+                  }
+              }
+          )
+          if (!res.ok) {
+              throw new Error('not available');
+          }
+          const dataFromJSON = await res.json();
+          setEditData(dataFromJSON)
+      }
+      catch (err) {
+          console.log(err);
+      }}
     
     return(
       <div className='handleactionButton'>
-        <div className='edit action' onClick={handleEditAction} > <EditIcon/> <div> Edit Asset </div></div>
+        <div className='edit action' onClick={async()=>{
+           try{
+            await fetchData();
+          setIsbuttonopen(true);
+          setActionButton(false);
+          }catch(err){
+            console.log(err)
+          }}} > <EditIcon/> <div> Edit Asset </div></div>
 
         <div className='delete action' onClick={()=>
         { setActionButton(false)

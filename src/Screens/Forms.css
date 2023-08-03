@@ -1,0 +1,41 @@
+.row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 2rem;
+}
+
+.lines{
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.2rem;
+    text-align: left;
+    max-height: 500px;
+    overflow-y: scroll;
+    padding : 15px;
+}
+
+.modalinputfield{
+        height: 20px;
+        width: 150px;
+        background-color: #ECEAF4;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+.modalselect{
+    height: 40px;
+    width: 170px;
+    background-color: #ECEAF4;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 0.5rem;
+}
+
+.end-buttons{
+   display: flex;
+   justify-content: center;
+}
+.end-buttons:hover{
+    cursor: pointer;
+}

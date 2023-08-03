@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { useForm , Controller} from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useAuth } from './GlobalContext'
 import Switch from '@mui/material/Switch';
 
@@ -58,7 +58,7 @@ export default function Forms() {
             <div className='row'>
               <div>
             <div>Owned By</div> 
-            <select {...register("ownedBy", { required: true }) } onChange={handleOwnedByChange}  className='modalselect'>
+            <select {...register("ownedBy", { required: true }) } onChange={handleOwnedByChange} defaultValue={editData?.[0].ownedBy} className='modalselect'>
             <option  value=""  hidden></option>
               <option value="client">Client</option>
               <option value="remote_state">RemoteState</option>
@@ -67,89 +67,101 @@ export default function Forms() {
             {ownedByValue==="client" &&
             <div>
             <div>Client Name</div>
-            <input {...register("clientName")} className='modalinputfield' type="text" placeholder='Enter Client Name'/>
+            <input {...register("clientName")}  defaultValue={editData?.[0].clientName} className='modalinputfield' type="text" placeholder='Enter Client Name'/>
+            
             </div>}
             </div>
     
             <div className='row'>
               <div>
               <div>Make</div>
-              <input {...register("brand")} className='modalinputfield' type="text" placeholder='Enter Brand Name'
+              <input {...register("brand", {required:true})}  defaultValue={editData?.[0].brand} className='modalinputfield' type="text" placeholder='Enter Brand Name'
               />
+              {errors.brand && <p style={{color:"red", fontSize:"10px", marginTop:"0.5px"}}> Brand is necessary</p>}
               </div>
               <div>
               <div>Model</div>
-              <input {...register("model")}  className='modalinputfield' type="text" placeholder='Enter Model Number'
+              <input {...register("model" , {required:true})}  defaultValue={editData?.[0].model}  className='modalinputfield' type="text" placeholder='Enter Model Number'
                 />
+                 {errors.model && <p style={{color:"red", fontSize:"10px", marginTop:"0.5px"}}> Make is necessary</p>}
               </div>
             </div>
     
             <div className='row'>
               <div>
               <div>Serial Number</div>
-              <input {...register("serialNO")}  className='modalinputfield' type="text" placeholder='Enter Serial Number' 
+              <input {...register("serialNo" , {required:true})}  defaultValue={editData?.[0].serialNo}  className='modalinputfield' type="text" placeholder='Enter Serial Number' 
               />
+               {errors.serialNo && <p style={{color:"red", fontSize:"10px", marginTop:"0.5px"}}> Serial No is necessary</p>}
               </div>
               <div>
               <div>Series</div>
-              <input {...register("series")}  className='modalinputfield' type="text" placeholder='Enter Series' />
+              <input {...register("series"  , {required:true})}  defaultValue={editData?.[0].series}  className='modalinputfield' type="text" placeholder='Enter Series' />
+              {errors.series && <p style={{color:"red", fontSize:"10px", marginTop:"0.5px"}}> series is necessary</p>}
               </div>
             </div>
     
             <div className='row'>
               <div>
               <div>Warranty Start Date</div>
-              <input {...register("warrantyStartDate")}   className='modalinputfield' type="date" placeholder='mm/dd/yyyy' 
+              <input {...register("warrantyStartDate"  , {required:true})}  defaultValue={editData?.[0].warrantyStartDate}   className='modalinputfield' type="date" placeholder='mm/dd/yyyy' 
               />
+               {errors.warrantyStartDate && <p style={{color:"red", fontSize:"10px", marginTop:"0.5px"}}> warrantyStartDate is necessary</p>}
               </div>
               <div>
               <div>Warranty Expiry Date</div>
-              <input {...register("warrantyExpiryDate")}  className='modalinputfield' type="date" placeholder='mm/dd/yyyy' 
+              <input {...register("warrantyExpiryDate" , {required:true})}  defaultValue={editData?.[0].warrantyExpiryDate}  className='modalinputfield' type="date" placeholder='mm/dd/yyyy' 
               />
+               {errors.warrantyExpiryDate && <p style={{color:"red", fontSize:"10px", marginTop:"0.5px"}}> warrantyExpiryDate is necessary</p>}
               </div>
             </div>
     
             <div className='row'>
               <div>
               <div>RAM</div>
-              <input  {...register("ram")}  className='modalinputfield' type="text" placeholder='Enter RAM' />
+              <input  {...register("ram"  , {required:true})}  defaultValue={editData?.[0].ram}  className='modalinputfield' type="text" placeholder='Enter RAM' />
+              {errors.ram && <p style={{color:"red", fontSize:"10px", marginTop:"0.5px"}}> ram is necessary</p>}
               </div>
               <div>
               <div>Processor</div>
-              <input  {...register("processor")}  className='modalinputfield' type="text" placeholder='Enter Processor' />
+              <input  {...register("processor" , {required:true})}  defaultValue={editData?.[0].processor} className='modalinputfield' type="text" placeholder='Enter Processor' />
+              {errors.processor && <p style={{color:"red", fontSize:"10px", marginTop:"0.5px"}}> processor is necessary</p>}
               </div>
             </div>
     
             <div className='row'>
               <div>
               <div>Screen Resolution</div>
-              <input  {...register("screenResolution")}  className='modalinputfield' type="text" placeholder='Enter Screen Resolution' />
-              </div>
+              <input  {...register("screenResolution" , {required:true})}  defaultValue={editData?.[0].screenResolution} className='modalinputfield' type="text" placeholder='Enter Screen Resolution' />
+              {errors.screenResolution && <p style={{color:"red", fontSize:"10px", marginTop:"0.5px"}}> screenResolution is necessary</p>}
+               </div>
               <div>
               <div>Operationg System</div>
-              <input  {...register("operatingSystem")}  className='modalinputfield' type="text" placeholder='Enter Operationg System' />
+              <input  {...register("operatingSystem" , {required:true})}  defaultValue={editData?.[0].operatingSystem} className='modalinputfield' type="text" placeholder='Enter Operationg System' />
+              {errors.operatingSystem && <p style={{color:"red", fontSize:"10px", marginTop:"0.5px"}}> operatingSystem is necessary</p>}
               </div>
             </div>
     
             <div className='row'>
               <div>
               <div>Date Of Purchase</div>
-              <input {...register("purchasedDate")}  className='modalinputfield' type="date" placeholder='dd/mm/yyyy' 
+              <input {...register("purchasedDate" , {required:true})}  defaultValue={editData?.[0].purchasedDate}  className='modalinputfield' type="date" placeholder='dd/mm/yyyy' 
               />
+               {errors.purchasedDate && <p style={{color:"red", fontSize:"10px", marginTop:"0.5px"}}> purchasedDate is necessary</p>}
               </div>
               <div>
               <div>Charger</div>
               <div >
-                No <Switch {...register("charger")} /> Yes
-              </div>
+                No <Switch {...register("charger" , {required:true}) }   defaultValue={editData?.[0].charger} /> Yes
+                {errors.charger && <p style={{color:"red", fontSize:"10px", marginTop:"0.5px"}}> charger is necessary</p>}
+                </div>
               </div>
             </div>
     
             <div className='row'>
               <button  className='end-buttons'>Cancel</button>
-              <button type='submit' className='end-buttons'>Save</button>
+              <button type='submit' className='end-buttons'>{editData?"Update": "Save"}</button>
               </div>
-              {errors.register && <div> {errors.register } is necessary</div>}
             </form>
 
         )

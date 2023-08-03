@@ -58,17 +58,17 @@ export  function Delete() {
 
 }
 
-export function Edit({selectedRowKey, token, selectedValue,editdata ,setEditData, addedData}){
+export function Edit({selectedRowKey, token, selectedValue,editdata ,setEditData, addedData, setIsbuttonopen}){
   
 
-  const handleBringEditAsset=()=>{
+  const handleBringEditAsset=async()=>{
     const params={
       assetId: selectedRowKey,
       assetType:selectedValue
 
     }
 
-    fetch(`https://devassetapi.remotestate.com/asset-management/user/asset/specifications?${new URLSearchParams(params).toString()}`, {
+     await fetch(`https://devassetapi.remotestate.com/asset-management/user/asset/specifications?${new URLSearchParams(params).toString()}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -92,7 +92,6 @@ export function Edit({selectedRowKey, token, selectedValue,editdata ,setEditData
       });
     }
     handleBringEditAsset();
-
     // console.log(selectedRowKey)
     // console.log(selectedValue)
 

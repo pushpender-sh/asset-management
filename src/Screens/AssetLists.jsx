@@ -1,7 +1,7 @@
 import React from 'react'
 import './AssetList.css'
 import { useAuth } from '../Screens/GlobalContext'
-import Modals from './Modals'
+// import Modals from './Modals'
 import Navbar from './Navbar'
 import search from '../Images/search.jpg'
 import cross from '../Images/cross.png'
@@ -22,8 +22,8 @@ function DataEntries({assetDetails,actionButton, setActionButton,selectedRowKey,
 
   function handleActionButton(){
     const handleEditAction=()=>{
+      Edit({selectedRowKey, token, selectedValue,editdata, setEditData, addedData, setIsbuttonopen});
       setIsbuttonopen(true)
-      Edit({selectedRowKey, token, selectedValue,editdata, setEditData, addedData});
     }
     
     return(
@@ -90,7 +90,9 @@ function DataEntries({assetDetails,actionButton, setActionButton,selectedRowKey,
   );
 }
 
-const HandleAddAssets=({setIsbuttonopen, selectedValue, setSelectedValue, setActionButton})=>{
+const HandleAddAssets=({setIsbuttonopen, selectedValue, setSelectedValue, setActionButton, setEditData})=>{
+
+  // setEditData()
 
   return(
     <div className='addnewasset'>
@@ -122,9 +124,10 @@ const HandleAddAssets=({setIsbuttonopen, selectedValue, setSelectedValue, setAct
 }
 
 function DataTable({assetDetails, input, setInput, checked, setChecked, isbuttonopen, setIsbuttonopen, 
-  actionButton, setActionButton, selectedRowKey, setSelectedRowKey}){
+  actionButton, setActionButton, selectedRowKey, setSelectedRowKey, setEditData}){
 
   const handleButtonClick = () => {
+    setEditData()
     if (isbuttonopen) {
       setIsbuttonopen(false)
     } else {
@@ -194,7 +197,7 @@ export default function AssetLists() {
     
     const { token, navigate ,input, setInput, checked, setChecked, isbuttonopen, setIsbuttonopen, assetDetails,
        selectedValue, setSelectedValue,  actionButton, setActionButton, selectedRowKey, setSelectedRowKey,
-       deletePopup} = useAuth();
+       deletePopup, setEditData} = useAuth();
 
        if(!token){
         navigate('/')
@@ -216,9 +219,10 @@ export default function AssetLists() {
     <Navbar/>
     <div style={{paddingTop:'1px'}}>
         <DataTable input={input} setInput={setInput} checked={checked} setChecked={setChecked} isbuttonopen={isbuttonopen} setIsbuttonopen={setIsbuttonopen}
-         assetDetails={assetDetails}  actionButton={actionButton} setActionButton={setActionButton} selectedRowKey={selectedRowKey} setSelectedRowKey={setSelectedRowKey} />
+         assetDetails={assetDetails}  actionButton={actionButton} setActionButton={setActionButton} selectedRowKey={selectedRowKey} setSelectedRowKey={setSelectedRowKey} setEditData={setEditData} />
 
-         <div className='addassetPopup'>{isbuttonopen && <HandleAddAssets setIsbuttonopen={setIsbuttonopen} selectedValue={selectedValue} setSelectedValue={setSelectedValue} setActionButton={setActionButton} />} </div>
+         <div className='addassetPopup'>{isbuttonopen && <HandleAddAssets setIsbuttonopen={setIsbuttonopen} selectedValue={selectedValue} setSelectedValue={setSelectedValue} setActionButton={setActionButton}
+           setEditData={setEditData} />} </div>
     </div>
          <div> {deletePopup && <Delete/>}</div>
          {/* <div> {<Edit/>}</div> */}

@@ -34,6 +34,9 @@ function DataEntries({assetDetails,actionButton, setActionButton,selectedRowKey,
                   }
               }
           )
+
+
+          
           if (!res.ok) {
               throw new Error('not available');
           }

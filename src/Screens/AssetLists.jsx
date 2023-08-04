@@ -14,8 +14,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Delete,Edit } from './Actions'
 import Forms from './Forms'
 
-
-
 function DataEntries({assetDetails,actionButton, setActionButton,selectedRowKey, setSelectedRowKey }) {
 
   const{token, deletePopup,setDeletePopup,selectedValue, setSelectedValue, setIsbuttonopen,editdata, setEditData, addedData} =useAuth()

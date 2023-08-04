@@ -38,7 +38,6 @@ export const AuthProvider=({children})=>{
      }
     }, []);
 
-
       useEffect(() => {
         const fetchData = async () => {
           try {

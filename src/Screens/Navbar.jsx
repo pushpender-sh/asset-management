@@ -20,7 +20,6 @@ function Logout({setToken, navigate}){
 }
 
 export default function Navbar() {
-
     const { setToken,  navigate} = useAuth();
     const [dropDown, setDropDown] = useState(false)
 

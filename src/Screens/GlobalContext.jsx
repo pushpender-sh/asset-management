@@ -22,10 +22,7 @@ export const AuthProvider=({children})=>{
 
     const[editData, setEditData] =useState();
 
-
     const navigate = useNavigate('')
-
-    
 
     useEffect(() => {
         // Check if a token is already stored (e.g., in local storage)
